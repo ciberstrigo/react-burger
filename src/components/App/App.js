@@ -8,7 +8,8 @@ import data from "../../utils/data";
 class App extends React.Component {
     state = {
         assortment: data,
-        burgerBun: data.filter((e) => e.type === 'bun')[0]
+        burgerBun: data.filter((e) => e.type === 'bun')[0],
+        ingredients: data.filter((e) => e.type !== 'bun')
     };
 
     render() {
@@ -17,7 +18,7 @@ class App extends React.Component {
             <main className={AppStyles.App__content}>
                 <div className={AppStyles.App__container}>
                     <BurgerIngredients assortment={this.state.assortment}/>
-                    <BurgerConstructor ingredients={this.state.assortment} burgerBun={this.state.burgerBun}/>
+                    <BurgerConstructor ingredients={this.state.ingredients} burgerBun={this.state.burgerBun}/>
                 </div>
             </main>
         </main>);

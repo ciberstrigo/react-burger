@@ -14,7 +14,7 @@ class BurgerIngredients extends React.Component {
                         <ConstructorElement
                             type="top"
                             isLocked={true}
-                            text={this.props.burgerBun.name}
+                            text={`${this.props.burgerBun.name} (верх)`}
                             price={this.props.burgerBun.price}
                             thumbnail={this.props.burgerBun.image}
                         />
@@ -36,7 +36,7 @@ class BurgerIngredients extends React.Component {
                         <ConstructorElement
                             type="bottom"
                             isLocked={true}
-                            text={this.props.burgerBun.name}
+                            text={`${this.props.burgerBun.name} (низ)`}
                             price={this.props.burgerBun.price}
                             thumbnail={this.props.burgerBun.image}
                             />

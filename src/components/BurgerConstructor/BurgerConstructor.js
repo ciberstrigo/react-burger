@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import BurgerConstructorStyle from "./BurgerConstructor.module.css"
 import {ConstructorElement, CurrencyIcon, Button} from "@ya.praktikum/react-developer-burger-ui-components";
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
+import types from "../../utils/types";
 
 class BurgerIngredients extends React.Component {
     render() {
@@ -58,15 +59,8 @@ class BurgerIngredients extends React.Component {
 }
 
 BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(
-
-    ),
-    burgerBun: PropTypes.shape({
-        _id: PropTypes.string,
-        name: PropTypes.string,
-        price: PropTypes.number,
-        image: PropTypes.string
-    })
+    ingredients: PropTypes.arrayOf(types.ingredient),
+    burgerBun: types.ingredient
 };
 
 export default BurgerIngredients;

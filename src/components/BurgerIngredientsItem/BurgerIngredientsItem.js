@@ -2,6 +2,7 @@ import React from "react";
 import style from "./BurgerIngredientsItem.module.css";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import types from "../../utils/types";
 
 class BurgerIngredientsItems extends React.Component {
     render() {
@@ -27,12 +28,7 @@ class BurgerIngredientsItems extends React.Component {
 }
 
 BurgerIngredientsItems.propTypes = {
-    data: PropTypes.shape({
-        _id: PropTypes.string,
-        name: PropTypes.string,
-        price: PropTypes.number,
-        image: PropTypes.string,
-    }),
+    data: types.ingredient,
     count: PropTypes.number
 };
 

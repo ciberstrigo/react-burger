@@ -3,6 +3,7 @@ import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsItem from "../BurgerIngredientsItem/BurgerIngredientsItem";
 import style from "./BurgerIngridients.module.css"
 import PropTypes from "prop-types";
+import types from "../../utils/types";
 
 class BurgerIngredients extends React.Component {
     tabs = [
@@ -76,15 +77,7 @@ class BurgerIngredients extends React.Component {
 }
 
 BurgerIngredients.propTypes = {
-    assortment: PropTypes.arrayOf(
-        PropTypes.shape({
-            _id: PropTypes.string,
-            name: PropTypes.string,
-            price: PropTypes.number,
-            image: PropTypes.string
-        })
-    ),
+    assortment: PropTypes.arrayOf(types.ingredient),
 };
-
 
 export default BurgerIngredients;

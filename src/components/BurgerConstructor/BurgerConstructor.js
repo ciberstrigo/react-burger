@@ -4,6 +4,7 @@ import BurgerConstructorStyle from "./BurgerConstructor.module.css"
 import {ConstructorElement, CurrencyIcon, Button} from "@ya.praktikum/react-developer-burger-ui-components";
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import types from "../../utils/types";
+import BurgerConstructorItem from "../BurgerConstructorItem/BurgerConstructorItem";
 
 class BurgerIngredients extends React.Component {
     render() {
@@ -13,7 +14,6 @@ class BurgerIngredients extends React.Component {
                     !!this.props.burgerBun && (
                         <ConstructorElement
                             type="top"
-                            isLocked={true}
                             text={`${this.props.burgerBun.name} (верх)`}
                             price={this.props.burgerBun.price}
                             thumbnail={this.props.burgerBun.image}
@@ -22,20 +22,15 @@ class BurgerIngredients extends React.Component {
                 }
                 {
                     this.props.ingredients.map((e) => {
-                        return (<ConstructorElement
-                            key={e._id}
-                            isLocked={true}
-                            text={e.name}
-                            price={e.price}
-                            thumbnail={e.image}
-                        />);
+                        return (
+                            <BurgerConstructorItem item={e} key={e._id}/>
+                        );
                     })
                 }
                 {
                     !!this.props.burgerBun && (
                         <ConstructorElement
                             type="bottom"
-                            isLocked={true}
                             text={`${this.props.burgerBun.name} (низ)`}
                             price={this.props.burgerBun.price}
                             thumbnail={this.props.burgerBun.image}

@@ -32,7 +32,7 @@ class BurgerIngredients extends React.Component {
             <h1 className={style.ingredients__title}>
                 Соберите бургер
             </h1>
-            <div style={{display: "flex"}}>
+            <div className={style.ingredients__menu}>
                 {
                     this.tabs.map((tab) => (
                         <Tab
@@ -63,7 +63,7 @@ class BurgerIngredients extends React.Component {
                                     .filter((position) => position.type === category.name)
                                     .map(
                                         (e) => {
-                                            return <BurgerIngredientsItem key={e._id} data={e} count={'0'}/>
+                                            return <BurgerIngredientsItem key={e._id} data={e} count={0}/>
                                         }
                                     )
                             }

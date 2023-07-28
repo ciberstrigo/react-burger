@@ -7,8 +7,7 @@ import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 class BurgerIngredients extends React.Component {
     render() {
         return <section className={BurgerConstructorStyle.burgerConstructor}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px'}}
-                 className={'pt-25 pl-4 pr-4 pb-10'}>
+            <div className={BurgerConstructorStyle.burgerConstructor__list}>
                 {
                     !!this.props.burgerBun && (
                         <ConstructorElement

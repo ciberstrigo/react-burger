@@ -1,3 +1,13 @@
+.AppHeaders {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.AppHeaders__leftNavigation {
+    display: flex;
+}
+
 .AppHeaders__navLink {
     composes: text text_type_main-default from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
     composes: pl-5 pr-5 pt-4 pb-4 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";

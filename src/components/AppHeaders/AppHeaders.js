@@ -4,8 +4,8 @@ import AppHeadersStyles from "./AppHeaders.module.css";
 
 class AppHeaders extends React.Component {
     render() {
-        return <header className="p-4" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-            <nav style={{display: 'flex'}}>
+        return <header className={`p-4 ${AppHeadersStyles.AppHeaders}`}>
+            <nav className={AppHeadersStyles.AppHeaders__leftNavigation}>
                 <a href={"/constructor"} className={`${AppHeadersStyles.AppHeaders__navLink} ${AppHeadersStyles.AppHeaders__navLink_active}`}>
                     <span className={AppHeadersStyles.AppHeaders__navLink__icon}>
                         <BurgerIcon type="primary"/>
@@ -21,7 +21,7 @@ class AppHeaders extends React.Component {
             </nav>
 
             <div className={AppHeadersStyles.AppHeaders__Logo}>
-                <Logo style={{display: 'flex'}} />
+                <Logo />
             </div>
 
             <a href={"/lk"} className={`${AppHeadersStyles.AppHeaders__navLink} ${AppHeadersStyles.AppHeaders__navLink_inactive}`} >

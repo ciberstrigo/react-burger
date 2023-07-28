@@ -14,8 +14,8 @@ class App extends React.Component {
     render() {
         return <main className={AppStyles.App__main}>
             <AppHeader/>
-            <main style={{ display: "flex", justifyContent: "center" }}> {/*, "*/}
-                <div style={{maxWidth: "1250px", display: "flex", gap: "40px"}}>
+            <main className={AppStyles.App__content}>
+                <div className={AppStyles.App__container}>
                     <BurgerIngredients assortment={this.state.assortment}/>
                     <BurgerConstructor ingredients={this.state.assortment} burgerBun={this.state.burgerBun}/>
                 </div>

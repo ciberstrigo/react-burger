@@ -14,8 +14,7 @@ class BurgerIngredientsItems extends React.Component {
             )}
             <img src={data.image} alt={data.name} className={style.item__image}/>
             <div className={style.item__price}>
-                <p className="text text_type_digits-medium pr-1"
-                   style={{ fontSize: "24px", lineHeight: "normal" }}>
+                <p className={`text text_type_digits-medium pr-1 ${style.item__price__value}`}>
                     {data.price}
                 </p>
                 <CurrencyIcon type="primary" />

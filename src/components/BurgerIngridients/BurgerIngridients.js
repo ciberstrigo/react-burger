@@ -28,7 +28,7 @@ class BurgerIngredients extends React.Component {
     }
 
     render() {
-        return <section className={style.ingredients}>
+        return (<section className={style.ingredients}>
             <h1 className={style.ingredients__title}>
                 Соберите бургер
             </h1>
@@ -63,15 +63,15 @@ class BurgerIngredients extends React.Component {
                                     .filter((position) => position.type === category.name)
                                     .map(
                                         (e) => {
-                                            return <BurgerIngredientsItem key={e._id} data={e} count={0}/>
+                                            return (<BurgerIngredientsItem key={e._id} data={e} count={0}/>);
                                         }
                                     )
                             }
                         </ul>
                     </div>
-                ) )}
+                ))}
             </div>
-        </section>;
+        </section>);
     }
 }
 

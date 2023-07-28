@@ -12,7 +12,7 @@ class App extends React.Component {
     };
 
     render() {
-        return <main className={AppStyles.App__main}>
+        return (<main className={AppStyles.App__main}>
             <AppHeader/>
             <main className={AppStyles.App__content}>
                 <div className={AppStyles.App__container}>
@@ -20,7 +20,7 @@ class App extends React.Component {
                     <BurgerConstructor ingredients={this.state.assortment} burgerBun={this.state.burgerBun}/>
                 </div>
             </main>
-        </main>;
+        </main>);
     }
 }
 

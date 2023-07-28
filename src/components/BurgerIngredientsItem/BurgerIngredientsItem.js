@@ -8,7 +8,7 @@ class BurgerIngredientsItems extends React.Component {
         const data = this.props.data;
         const count = this.props.count;
 
-        return <li key={data._id} className={style.item}>
+        return (<li key={data._id} className={style.item}>
             {count > 0 && (
                 <Counter count={count} size="default" extraClass="m-1" />
             )}
@@ -22,7 +22,7 @@ class BurgerIngredientsItems extends React.Component {
             <h2 className={style.item__title}>
                 {data.name}
             </h2>
-        </li>
+        </li>);
     }
 }
 

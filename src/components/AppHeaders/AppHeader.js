@@ -4,7 +4,7 @@ import AppHeadersStyles from "./AppHeader.module.css";
 
 class AppHeader extends React.Component {
     render() {
-        return <header className={`p-4 ${AppHeadersStyles.AppHeaders}`}>
+        return (<header className={`p-4 ${AppHeadersStyles.AppHeaders}`}>
             <nav className={AppHeadersStyles.AppHeaders__leftNavigation}>
                 <a href={"/constructor"} className={`${AppHeadersStyles.AppHeaders__navLink} ${AppHeadersStyles.AppHeaders__navLink_active}`}>
                     <span className={AppHeadersStyles.AppHeaders__navLink__icon}>
@@ -30,7 +30,7 @@ class AppHeader extends React.Component {
                 </span>
                 Личный кабинет
             </a>
-        </header>;
+        </header>);
     }
 }
 

@@ -6,7 +6,7 @@ import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 
 class BurgerIngredients extends React.Component {
     render() {
-        return <section className={BurgerConstructorStyle.burgerConstructor}>
+        return (<section className={BurgerConstructorStyle.burgerConstructor}>
             <div className={BurgerConstructorStyle.burgerConstructor__list}>
                 {
                     !!this.props.burgerBun && (
@@ -21,13 +21,13 @@ class BurgerIngredients extends React.Component {
                 }
                 {
                     this.props.ingredients.map((e) => {
-                        return <ConstructorElement
+                        return (<ConstructorElement
                             key={e._id}
                             isLocked={true}
                             text={e.name}
                             price={e.price}
                             thumbnail={e.image}
-                        />
+                        />);
                     })
                 }
                 {
@@ -53,18 +53,13 @@ class BurgerIngredients extends React.Component {
                     </Button>
                 </div>
             </div>
-        </section>
+        </section>);
     }
 }
 
 BurgerIngredients.propTypes = {
     ingredients: PropTypes.arrayOf(
-        PropTypes.shape({
-            _id: PropTypes.string,
-            name: PropTypes.string,
-            price: PropTypes.number,
-            image: PropTypes.string
-        })
+
     ),
     burgerBun: PropTypes.shape({
         _id: PropTypes.string,

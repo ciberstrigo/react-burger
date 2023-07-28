@@ -1,8 +1,8 @@
 import React from "react";
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import AppHeadersStyles from "./AppHeaders.module.css";
+import AppHeadersStyles from "./AppHeader.module.css";
 
-class AppHeaders extends React.Component {
+class AppHeader extends React.Component {
     render() {
         return <header className={`p-4 ${AppHeadersStyles.AppHeaders}`}>
             <nav className={AppHeadersStyles.AppHeaders__leftNavigation}>
@@ -34,4 +34,4 @@ class AppHeaders extends React.Component {
     }
 }
 
-export default AppHeaders;
+export default AppHeader;

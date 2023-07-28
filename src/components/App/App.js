@@ -1,5 +1,5 @@
 import React from "react";
-import AppHeader from "../AppHeaders/AppHeaders";
+import AppHeader from "../AppHeaders/AppHeader";
 import BurgerIngredients from "../BurgerIngridients/BurgerIngridients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor"
 import AppStyles from "./App.module.css"

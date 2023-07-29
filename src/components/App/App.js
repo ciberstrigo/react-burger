@@ -15,12 +15,12 @@ class App extends React.Component {
     render() {
         return (<main className={style.App__main}>
             <AppHeader/>
-            <main className={style.App__content}>
+            <div className={style.App__content}>
                 <div className={style.App__container}>
                     <BurgerIngredients assortment={this.state.assortment}/>
                     <BurgerConstructor ingredients={this.state.ingredients} burgerBun={this.state.burgerBun}/>
                 </div>
-            </main>
+            </div>
         </main>);
     }
 }

@@ -4,7 +4,7 @@
     flex: 0 50%;
     flex-basis: 50%;
     position: relative;
-    composes: pt-6 pb-10 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
+    composes: pt-6 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 }
 
 .item__image {

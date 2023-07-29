@@ -52,7 +52,7 @@ class BurgerIngredients extends React.Component {
                     ))
                 }
             </div>
-            <div className={style.ingredients__list}>
+            <div className={`${style.ingredients__list}`}>
                 {this.tabs.map( (category) => (
                     <div key={category.name}>
                         <h1 className={style.ingredients__list__title}>

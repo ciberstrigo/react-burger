@@ -17,9 +17,11 @@ class BurgerIngredients extends React.Component {
                             text={`${this.props.burgerBun.name} (верх)`}
                             price={this.props.burgerBun.price}
                             thumbnail={this.props.burgerBun.image}
+                            extraClass={'mr-4'}
                         />
                     )
                 }
+                <div className={`${BurgerConstructorStyle.scrollable}`}>
                 {
                     this.props.ingredients.map((e) => {
                         return (
@@ -27,6 +29,7 @@ class BurgerIngredients extends React.Component {
                         );
                     })
                 }
+                </div>
                 {
                     !!this.props.burgerBun && (
                         <ConstructorElement
@@ -34,6 +37,7 @@ class BurgerIngredients extends React.Component {
                             text={`${this.props.burgerBun.name} (низ)`}
                             price={this.props.burgerBun.price}
                             thumbnail={this.props.burgerBun.image}
+                            extraClass={'mr-4'}
                             />
                     )
                 }

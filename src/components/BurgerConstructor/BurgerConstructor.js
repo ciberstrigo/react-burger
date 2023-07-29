@@ -23,11 +23,11 @@ class BurgerIngredients extends React.Component {
                 }
                 <div className={`${style.scrollable}`}>
                 {
-                    this.props.ingredients.map((e) => {
-                        return (
+                    this.props.ingredients.map((e) =>
+                        e.type !== 'bun' && (
                             <BurgerConstructorItem item={e} key={e._id}/>
-                        );
-                    })
+                        )
+                    )
                 }
                 </div>
                 {

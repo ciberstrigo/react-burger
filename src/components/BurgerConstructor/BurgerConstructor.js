@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import BurgerConstructorStyle from "./BurgerConstructor.module.css"
+import style from "./BurgerConstructor.module.css"
 import {ConstructorElement, CurrencyIcon, Button} from "@ya.praktikum/react-developer-burger-ui-components";
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import types from "../../utils/types";
@@ -8,8 +8,8 @@ import BurgerConstructorItem from "../BurgerConstructorItem/BurgerConstructorIte
 
 class BurgerIngredients extends React.Component {
     render() {
-        return (<section className={BurgerConstructorStyle.burgerConstructor}>
-            <div className={BurgerConstructorStyle.burgerConstructor__list}>
+        return (<section className={style.burgerConstructor}>
+            <div className={style.burgerConstructor__list}>
                 {
                     !!this.props.burgerBun && (
                         <ConstructorElement
@@ -21,7 +21,7 @@ class BurgerIngredients extends React.Component {
                         />
                     )
                 }
-                <div className={`${BurgerConstructorStyle.scrollable}`}>
+                <div className={`${style.scrollable}`}>
                 {
                     this.props.ingredients.map((e) => {
                         return (
@@ -41,9 +41,9 @@ class BurgerIngredients extends React.Component {
                             />
                     )
                 }
-                <div className={BurgerConstructorStyle.makeOrderBlock}>
-                    <div className={BurgerConstructorStyle.priceBlock}>
-                    <span className={BurgerConstructorStyle.priceBlock__number}>
+                <div className={style.makeOrderBlock}>
+                    <div className={style.priceBlock}>
+                    <span className={style.priceBlock__number}>
                         610
                     </span>
                         <CurrencyIcon type="primary"/>

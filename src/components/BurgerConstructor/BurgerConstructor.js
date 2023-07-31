@@ -18,6 +18,7 @@ class BurgerIngredients extends React.Component {
                             price={this.props.burgerBun.price}
                             thumbnail={this.props.burgerBun.image}
                             extraClass={'mr-4'}
+                            isLocked={true}
                         />
                     )
                 }
@@ -38,6 +39,7 @@ class BurgerIngredients extends React.Component {
                             price={this.props.burgerBun.price}
                             thumbnail={this.props.burgerBun.image}
                             extraClass={'mr-4'}
+                            isLocked={true}
                             />
                     )
                 }

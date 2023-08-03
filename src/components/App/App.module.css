@@ -1,0 +1,14 @@
+.App__main {
+    margin: 40px;
+}
+
+.App__content {
+    display: flex;
+    justify-content: center;
+}
+
+.App__container {
+    max-width: 1250px;
+    display: flex;
+    gap: 40px;
+}

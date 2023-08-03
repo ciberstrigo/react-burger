@@ -1,0 +1,57 @@
+.burgerConstructor {
+    display: flex;
+    flex-basis: 50%;
+    flex-direction: column;
+}
+
+.burgerConstructor__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    composes: pt-25 pb-10 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
+    align-items: flex-end;
+}
+
+.makeOrderBlock {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    composes: pt-10 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css"
+}
+
+.priceBlock {
+    composes: pr-10 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css"
+}
+
+.priceBlock svg {
+    margin-left: 9px;
+}
+
+.priceBlock__number {
+    composes: text text_type_digits-medium from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
+}
+
+.priceBlock__currencyIcon {
+    width: 36px;
+    height: 36px;
+}
+
+.scrollable {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 640px);
+    overflow-y: scroll;
+    padding-right: 8px;
+}
+
+.scrollable::-webkit-scrollbar {
+    width: 8px;
+}
+.scrollable::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+.scrollable::-webkit-scrollbar-thumb {
+    background: #8585AD;
+    border-radius: 0;
+}

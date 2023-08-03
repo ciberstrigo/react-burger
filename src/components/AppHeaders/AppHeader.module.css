@@ -1,0 +1,36 @@
+.AppHeaders {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.AppHeaders__leftNavigation {
+    display: flex;
+}
+
+.AppHeaders__navLink {
+    composes: text text_type_main-default from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
+    composes: pl-5 pr-5 pt-4 pb-4 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
+    display: flex;
+    text-decoration: none;
+}
+
+.AppHeaders__navLink_active {
+    composes: text_color_primary from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
+    fill: white;
+}
+
+.AppHeaders__navLink_inactive {
+    composes: text_color_inactive from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
+    fill: #8585AD;
+}
+
+.AppHeaders__navLink__icon {
+    composes: pr-2 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
+}
+
+.AppHeaders__Logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}

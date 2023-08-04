@@ -7,6 +7,22 @@ import types from "../../utils/types";
 import BurgerConstructorItem from "../BurgerConstructorItem/BurgerConstructorItem";
 
 const BurgerIngredients = ({burgerBun, ingredients, showOrderDetails}) => {
+    const scrollableRef = React.useRef();
+
+    const adjustContainerHeight = () => {
+        const height = window.innerHeight - (window.innerHeight % 90);
+        scrollableRef.current.style.maxHeight = `calc(${height}px - 640px)`;
+    }
+
+    React.useEffect(() => {
+        adjustContainerHeight();
+        window.addEventListener('resize', adjustContainerHeight);
+
+        return () => {
+            document.removeEventListener('resize', adjustContainerHeight);
+        };
+    });
+
     return (<section className={style.burgerConstructor}>
         <div className={style.burgerConstructor__list}>
             {
@@ -21,7 +37,7 @@ const BurgerIngredients = ({burgerBun, ingredients, showOrderDetails}) => {
                     />
                 )
             }
-            <div className={`${style.scrollable}`}>
+            <div className={`${style.scrollable}`} ref={scrollableRef}>
             {
                 ingredients &&
                 ingredients.map((e) =>

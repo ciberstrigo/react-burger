@@ -43,6 +43,8 @@
     max-height: calc(100vh - 640px);
     overflow-y: scroll;
     padding-right: 8px;
+
+    scroll-snap-type: y mandatory;
 }
 
 .scrollable::-webkit-scrollbar {

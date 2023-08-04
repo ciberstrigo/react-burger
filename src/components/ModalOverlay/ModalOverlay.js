@@ -6,6 +6,20 @@ import React from "react";
 const modalRoot = document.getElementById("modals");
 
 const ModalOverlay = ({ children, onClick }) => {
+    const handleEsc = (e) => {
+        if (e.key === "Escape") {
+            onClick();
+        }
+    }
+
+    React.useEffect(() => {
+        document.addEventListener("keydown", handleEsc, false);
+
+        return () => {
+            document.removeEventListener("keydown", handleEsc, false);
+        };
+    }, []);
+
     if(modalRoot) {
         return ReactDOM.createPortal(
             (

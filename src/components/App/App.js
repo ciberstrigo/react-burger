@@ -60,14 +60,14 @@ const App = () => {
         </div>
       </main>
       {orderVisible && (
-        <Modal onClick={toggleOrderDetails}>
+        <Modal onClose={toggleOrderDetails}>
           <OrderDetails />
         </Modal>
       )}
       {currentIngredient && (
         <Modal
           header={"Детали ингредиента"}
-          onClick={() => {
+          onClose={() => {
             showIngredientDetails(null);
           }}
         >

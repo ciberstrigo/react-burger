@@ -3,23 +3,21 @@ import style from "./BurgerConstructorItem.module.css";
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import types from "../../utils/types";
 
-class BurgerConstructorItem extends React.Component {
-    render() {
-        return (
-            <div
-                className={`${style.item}`}
-                draggable
-            >
-                <DragIcon type="primary" />
-                <ConstructorElement
-                    isLocked={false}
-                    text={this.props.item.name}
-                    price={this.props.item.price}
-                    thumbnail={this.props.item.image}
-                />
-            </div>
-        );
-    }
+const BurgerConstructorItem = ({item}) => {
+    return (
+        <div
+            className={`${style.item}`}
+            draggable
+        >
+            <DragIcon type="primary" />
+            <ConstructorElement
+                isLocked={false}
+                text={item.name}
+                price={item.price}
+                thumbnail={item.image}
+            />
+        </div>
+    );
 }
 
 BurgerConstructorItem.propTypes = {

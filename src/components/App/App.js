@@ -19,7 +19,12 @@ const App = () => {
 
     React.useEffect(() => {
         fetch(`${API_URL}/ingredients`)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(`Ошибка ${response.status}`);
+            })
             .then(({data}) => {
                 setAssortment(data);
                 setBurgerBun(data.filter((e) => e.type === 'bun')[0]);

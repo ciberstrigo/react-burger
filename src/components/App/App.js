@@ -44,9 +44,9 @@ const App = () => {
   };
 
   return (
-    <main className={style.App__main}>
+    <div className={style.App__main}>
       <AppHeader />
-      <div className={style.App__content}>
+      <main className={style.App__content}>
         <div className={style.App__container}>
           <BurgerIngredients
             assortment={assortment}
@@ -58,7 +58,7 @@ const App = () => {
             showOrderDetails={toggleOrderDetails}
           />
         </div>
-      </div>
+      </main>
       {orderVisible && (
         <Modal onClick={toggleOrderDetails}>
           <OrderDetails />
@@ -74,7 +74,7 @@ const App = () => {
           <IngredientDetails ingredient={currentIngredient} />
         </Modal>
       )}
-    </main>
+    </div>
   );
 };
 

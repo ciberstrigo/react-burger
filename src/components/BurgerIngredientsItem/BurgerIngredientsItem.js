@@ -9,7 +9,10 @@ class BurgerIngredientsItems extends React.Component {
         const data = this.props.data;
         const count = this.props.count;
 
-        return (<li key={data._id} className={style.item}>
+        return (<li key={data._id}
+                    className={style.item}
+                    onClick={() => {window.getSelection().toString() === '' && this.props.onClick(data)}}
+        >
             {count > 0 && (
                 <Counter count={count} size="default" extraClass="m-1" />
             )}
@@ -29,7 +32,8 @@ class BurgerIngredientsItems extends React.Component {
 
 BurgerIngredientsItems.propTypes = {
     data: types.ingredient,
-    count: PropTypes.number
+    count: PropTypes.number,
+    onClick: PropTypes.func
 };
 
 export default BurgerIngredientsItems;

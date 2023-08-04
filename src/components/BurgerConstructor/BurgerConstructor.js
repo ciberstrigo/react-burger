@@ -24,6 +24,7 @@ class BurgerIngredients extends React.Component {
                 }
                 <div className={`${style.scrollable}`}>
                 {
+                    this.props.ingredients &&
                     this.props.ingredients.map((e) =>
                         e.type !== 'bun' && (
                             <BurgerConstructorItem item={e} key={e._id}/>
@@ -50,7 +51,7 @@ class BurgerIngredients extends React.Component {
                     </span>
                         <CurrencyIcon type="primary"/>
                     </div>
-                    <Button htmlType="button" type="primary" size="large">
+                    <Button htmlType="button" type="primary" size="large" onClick={this.props.showOrderDetails}>
                         Оформить заказ
                     </Button>
                 </div>
@@ -61,7 +62,8 @@ class BurgerIngredients extends React.Component {
 
 BurgerIngredients.propTypes = {
     ingredients: PropTypes.arrayOf(types.ingredient),
-    burgerBun: types.ingredient
+    burgerBun: types.ingredient,
+    showOrderDetails: PropTypes.func
 };
 
 export default BurgerIngredients;

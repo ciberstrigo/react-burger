@@ -60,11 +60,12 @@ class BurgerIngredients extends React.Component {
                         </h1>
                         <ul className={style.ingredients__list__collection}>
                             {
+                                this.props.assortment &&
                                 this.props.assortment
                                     .filter((position) => position.type === category.name)
                                     .map(
                                         (e) => {
-                                            return (<BurgerIngredientsItem key={e._id} data={e} count={0}/>);
+                                            return (<BurgerIngredientsItem onClick={this.props.showDetails} key={e._id} data={e} count={0}/>);
                                         }
                                     )
                             }
@@ -78,6 +79,7 @@ class BurgerIngredients extends React.Component {
 
 BurgerIngredients.propTypes = {
     assortment: PropTypes.arrayOf(types.ingredient),
+    showDetails: PropTypes.func
 };
 
 export default BurgerIngredients;

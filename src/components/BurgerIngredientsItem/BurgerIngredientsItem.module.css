@@ -4,8 +4,33 @@
     flex: 0 50%;
     flex-basis: 50%;
     position: relative;
-    composes: pt-6 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
+    composes: mt-6 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
+    transition: all 0.1s ease;
+    border-radius: 10px;
 }
+
+.item:hover {
+    transform: scale(0.95); /* Увеличение на 10% */
+    box-shadow: 0 0 30px -5px #4c4cff; /* Голубая тень */
+}
+
+.item:active {
+    transform: scale(0.90); /* Увеличение на 10% */
+    box-shadow: 0 0 30px -5px #801ab3; /* Голубая тень */
+}
+
+.item::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: inherit;
+    /*box-shadow: inset 0 0 20px rgba(0, 0, 255, 0.5);*/
+    pointer-events: none; /* Чтобы не вмешивалось в события мыши */
+}
+
 
 .item__image {
     composes: pl-4 pr-4 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";

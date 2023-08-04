@@ -1,14 +1,14 @@
 import React from "react";
 import style from "./BurgerConstructorItem.module.css";
-import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import {
+    ConstructorElement,
+    DragIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import types from "../../utils/types";
 
-const BurgerConstructorItem = ({item}) => {
+const BurgerConstructorItem = ({ item }) => {
     return (
-        <div
-            className={`${style.item}`}
-            draggable
-        >
+        <div className={`${style.item}`} draggable>
             <DragIcon type="primary" />
             <ConstructorElement
                 isLocked={false}
@@ -18,10 +18,10 @@ const BurgerConstructorItem = ({item}) => {
             />
         </div>
     );
-}
+};
 
 BurgerConstructorItem.propTypes = {
-    item: types.ingredient
+    item: types.ingredient,
 };
 
 export default BurgerConstructorItem;

@@ -1,0 +1,9 @@
+.IngredientDetails__container {
+    text-align: center;
+}
+
+.IngredientDetails__nutrients {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}

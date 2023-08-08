@@ -22,7 +22,7 @@
 
 .AppHeaders__navLink_inactive {
     composes: text_color_inactive from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
-    fill: #8585AD;
+    fill: #8585ad;
 }
 
 .AppHeaders__navLink__icon {

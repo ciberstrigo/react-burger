@@ -5,7 +5,14 @@ const types = {
         _id: PropTypes.string,
         name: PropTypes.string,
         price: PropTypes.number,
-        image: PropTypes.string
+        image: PropTypes.string,
+        image_large: PropTypes.string,
+        image_mobile: PropTypes.string,
+        calories: PropTypes.number,
+        carbohydrates: PropTypes.number,
+        fat: PropTypes.number,
+        proteins: PropTypes.number,
+        type: PropTypes.string
     })
 };
 

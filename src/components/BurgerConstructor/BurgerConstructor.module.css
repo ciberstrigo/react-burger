@@ -16,11 +16,11 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    composes: pt-10 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css"
+    composes: pt-10 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 }
 
 .priceBlock {
-    composes: pr-10 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css"
+    composes: pr-10 from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 }
 
 .priceBlock svg {
@@ -43,15 +43,17 @@
     max-height: calc(100vh - 640px);
     overflow-y: scroll;
     padding-right: 8px;
+
+    scroll-snap-type: y mandatory;
 }
 
 .scrollable::-webkit-scrollbar {
     width: 8px;
 }
 .scrollable::-webkit-scrollbar-track {
-    background: #2F2F37;
+    background: #2f2f37;
 }
 .scrollable::-webkit-scrollbar-thumb {
-    background: #8585AD;
+    background: #8585ad;
     border-radius: 0;
 }

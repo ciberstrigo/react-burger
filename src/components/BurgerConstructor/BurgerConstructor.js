@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import style from "./BurgerConstructor.module.css";
 import {
@@ -9,8 +9,10 @@ import {
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import types from "../../utils/types";
 import BurgerConstructorItem from "../BurgerConstructorItem/BurgerConstructorItem";
+import { BurgerConstructorContext } from "../../utils/burgerConstructorContext";
 
-const BurgerIngredients = ({ burgerBun, ingredients, showOrderDetails }) => {
+const BurgerConstructor = () => {
+    const { burger, makeOrder, price } = useContext(BurgerConstructorContext);
     const scrollableRef = React.useRef();
 
     const adjustContainerHeight = () => {
@@ -20,8 +22,8 @@ const BurgerIngredients = ({ burgerBun, ingredients, showOrderDetails }) => {
 
     React.useEffect(() => {
         adjustContainerHeight();
-        window.addEventListener("resize", adjustContainerHeight);
 
+        window.addEventListener("resize", adjustContainerHeight);
         return () => {
             window.removeEventListener("resize", adjustContainerHeight);
         };
@@ -30,19 +32,19 @@ const BurgerIngredients = ({ burgerBun, ingredients, showOrderDetails }) => {
     return (
         <section className={style.burgerConstructor}>
             <div className={style.burgerConstructor__list}>
-                {!!burgerBun && (
+                {!!burger.bun && (
                     <ConstructorElement
                         type="top"
-                        text={`${burgerBun.name} (верх)`}
-                        price={burgerBun.price}
-                        thumbnail={burgerBun.image}
+                        text={`${burger.bun.name} (верх)`}
+                        price={burger.bun.price}
+                        thumbnail={burger.bun.image}
                         extraClass={"mr-4"}
                         isLocked={true}
                     />
                 )}
                 <div className={`${style.scrollable}`} ref={scrollableRef}>
-                    {ingredients &&
-                        ingredients.map(
+                    {burger.ingredients &&
+                        burger.ingredients.map(
                             (e) =>
                                 e.type !== "bun" && (
                                     <BurgerConstructorItem
@@ -52,26 +54,28 @@ const BurgerIngredients = ({ burgerBun, ingredients, showOrderDetails }) => {
                                 ),
                         )}
                 </div>
-                {!!burgerBun && (
+                {!!burger.bun && (
                     <ConstructorElement
                         type="bottom"
-                        text={`${burgerBun.name} (низ)`}
-                        price={burgerBun.price}
-                        thumbnail={burgerBun.image}
+                        text={`${burger.bun.name} (низ)`}
+                        price={burger.bun.price}
+                        thumbnail={burger.bun.image}
                         extraClass={"mr-4"}
                         isLocked={true}
                     />
                 )}
                 <div className={style.makeOrderBlock}>
                     <div className={style.priceBlock}>
-                        <span className={style.priceBlock__number}>610</span>
+                        <span className={style.priceBlock__number}>
+                            {price}
+                        </span>
                         <CurrencyIcon type="primary" />
                     </div>
                     <Button
                         htmlType="button"
                         type="primary"
                         size="large"
-                        onClick={showOrderDetails}
+                        onClick={makeOrder}
                     >
                         Оформить заказ
                     </Button>
@@ -81,10 +85,10 @@ const BurgerIngredients = ({ burgerBun, ingredients, showOrderDetails }) => {
     );
 };
 
-BurgerIngredients.propTypes = {
+BurgerConstructor.propTypes = {
     ingredients: PropTypes.arrayOf(types.ingredient),
-    burgerBun: types.ingredient,
+    burger: types.burger,
     showOrderDetails: PropTypes.func,
 };
 
-export default BurgerIngredients;
+export default BurgerConstructor;

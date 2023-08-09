@@ -5,8 +5,11 @@ import {
     DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import types from "../../utils/types";
+import { BurgerConstructorContext } from "../../utils/burgerConstructorContext";
 
 const BurgerConstructorItem = ({ item }) => {
+    const { removeIngredient } = React.useContext(BurgerConstructorContext);
+
     return (
         <div className={`${style.item}`} draggable>
             <DragIcon type="primary" />
@@ -15,6 +18,9 @@ const BurgerConstructorItem = ({ item }) => {
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image}
+                handleClose={() => {
+                    removeIngredient(item);
+                }}
             />
         </div>
     );

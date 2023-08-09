@@ -9,7 +9,7 @@ import {
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import types from "../../utils/types";
 import BurgerConstructorItem from "../BurgerConstructorItem/BurgerConstructorItem";
-import { BurgerConstructorContext } from "../../utils/burgerConstructorContext";
+import { BurgerConstructorContext } from "../../utils/contexts";
 
 const BurgerConstructor = () => {
     const { burger, makeOrder, price } = useContext(BurgerConstructorContext);

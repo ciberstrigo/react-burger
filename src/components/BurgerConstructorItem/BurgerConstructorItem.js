@@ -5,7 +5,7 @@ import {
     DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import types from "../../utils/types";
-import { BurgerConstructorContext } from "../../utils/burgerConstructorContext";
+import { BurgerConstructorContext } from "../../utils/contexts";
 
 const BurgerConstructorItem = ({ item }) => {
     const { removeIngredient } = React.useContext(BurgerConstructorContext);

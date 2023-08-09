@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsItem from "../BurgerIngredientsItem/BurgerIngredientsItem";
 import style from "./BurgerIngridients.module.css";
 import PropTypes from "prop-types";
 import types from "../../utils/types";
+import {BurgerIngredientsContext} from "../../utils/contexts";
 
-const BurgerIngredients = ({ assortment, showDetails }) => {
+const BurgerIngredients = () => {
+    const { assortment, showDetails } = useContext(BurgerIngredientsContext);
+
     const tabs = [
         {
             name: "bun",

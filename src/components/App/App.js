@@ -6,7 +6,7 @@ import style from "./App.module.css";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import OrderDetails from "../OrderDetails/OrderDetails";
-import { BurgerConstructorContext } from "../../utils/burgerConstructorContext";
+import { BurgerConstructorContext, BurgerIngredientsContext } from "../../utils/contexts";
 
 const API_URL = "https://norma.nomoreparties.space/api";
 
@@ -161,10 +161,9 @@ const App = () => {
             <AppHeader />
             <main className={style.App__content}>
                 <div className={style.App__container}>
-                    <BurgerIngredients
-                        assortment={assortment}
-                        showDetails={showIngredientDetails}
-                    />
+                    <BurgerIngredientsContext.Provider value={{assortment, showIngredientDetails}}>
+                        <BurgerIngredients/>
+                    </BurgerIngredientsContext.Provider>
                     <BurgerConstructorContext.Provider value={BurgerConstructorContextValue}>
                         <BurgerConstructor />
                     </BurgerConstructorContext.Provider>

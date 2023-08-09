@@ -152,6 +152,10 @@ const App = () => {
         setOrderDetails(null);
     };
 
+    const BurgerConstructorContextValue = React.useMemo(() => {
+        return { burger, price, makeOrder, removeIngredient };
+    }, [burger, price]);
+
     return (
         <div className={style.App__main}>
             <AppHeader />
@@ -161,14 +165,7 @@ const App = () => {
                         assortment={assortment}
                         showDetails={showIngredientDetails}
                     />
-                    <BurgerConstructorContext.Provider
-                        value={{
-                            burger: burger,
-                            price: price,
-                            makeOrder: makeOrder,
-                            removeIngredient: removeIngredient,
-                        }}
-                    >
+                    <BurgerConstructorContext.Provider value={BurgerConstructorContextValue}>
                         <BurgerConstructor />
                     </BurgerConstructorContext.Provider>
                 </div>

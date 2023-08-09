@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useMemo, useReducer, useState} from "react";
 import AppHeader from "../AppHeaders/AppHeader";
 import BurgerIngredients from "../BurgerIngridients/BurgerIngridients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
@@ -11,16 +11,16 @@ import { BurgerConstructorContext } from "../../utils/burgerConstructorContext";
 const API_URL = "https://norma.nomoreparties.space/api";
 
 const App = () => {
-    const [currentIngredient, setCurrentIngredient] = React.useState(null);
-    const [assortment, setAssortment] = React.useState();
-    const [orderDetails, setOrderDetails] = React.useState();
-    const [burger, setBurger] = React.useState({ bun: null, ingredients: [] });
+    const [currentIngredient, setCurrentIngredient] = useState(null);
+    const [assortment, setAssortment] = useState();
+    const [orderDetails, setOrderDetails] = useState();
+    const [burger, setBurger] = useState({ bun: null, ingredients: [] });
 
-    const checkReponse = (res) => {
+    const checkResponse = (res) => {
         return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
     };
 
-    const [price, priceDispatch] = React.useReducer((state, { action }) => {
+    const [price, priceDispatch] = useReducer((state, { action }) => {
         if (["add_ingredient", "remove_ingredient"].includes(action)) {
             return [
                 burger.bun?.price,
@@ -80,9 +80,9 @@ const App = () => {
         priceDispatch({ action: "remove_ingredient" });
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetch(`${API_URL}/ingredients`)
-            .then(checkReponse)
+            .then(checkResponse)
             .then(({ data }) => {
                 setAssortment(data);
 
@@ -131,7 +131,7 @@ const App = () => {
                 ].map((e) => e._id),
             }),
         })
-            .then(checkReponse)
+            .then(checkResponse)
             .then((data) => {
                 setOrderDetails(data);
             })
@@ -152,7 +152,7 @@ const App = () => {
         setOrderDetails(null);
     };
 
-    const BurgerConstructorContextValue = React.useMemo(() => {
+    const BurgerConstructorContextValue = useMemo(() => {
         return { burger, price, makeOrder, removeIngredient };
     }, [burger, price]);
 

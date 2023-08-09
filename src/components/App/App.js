@@ -16,6 +16,10 @@ const App = () => {
     const [orderDetails, setOrderDetails] = React.useState();
     const [burger, setBurger] = React.useState({ bun: null, ingredients: [] });
 
+    const checkReponse = (res) => {
+        return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+    };
+
     const [price, priceDispatch] = React.useReducer((state, { action }) => {
         if (["add_ingredient", "remove_ingredient"].includes(action)) {
             return [
@@ -78,12 +82,7 @@ const App = () => {
 
     React.useEffect(() => {
         fetch(`${API_URL}/ingredients`)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(`Ошибка ${response.status}`);
-            })
+            .then(checkReponse)
             .then(({ data }) => {
                 setAssortment(data);
 
@@ -132,14 +131,7 @@ const App = () => {
                 ].map((e) => e._id),
             }),
         })
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(
-                    `Ошибка при попытке сделать заказ ${response.status}`,
-                );
-            })
+            .then(checkReponse)
             .then((data) => {
                 setOrderDetails(data);
             })

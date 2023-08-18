@@ -2,14 +2,15 @@ import React from "react";
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import icon from "../../images/icon.svg";
 import style from "./OrderDetails.module.css";
+import types from "../../utils/types";
 
-const OrderDetails = () => {
+const OrderDetails = ({ details }) => {
     return (
         <div className={style.OrderDetails__content}>
             <p
                 className={`text text_type_digits-large ${style.OrderDetails__number}`}
             >
-                034536
+                {details.order.number}
             </p>
             <h2 className={"pt-8 text text_type_main-medium"}>
                 идентификатор заказа
@@ -23,6 +24,10 @@ const OrderDetails = () => {
             </p>
         </div>
     );
+};
+
+OrderDetails.propTypes = {
+    details: types.order,
 };
 
 export default OrderDetails;

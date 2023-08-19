@@ -3,6 +3,7 @@ import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import icon from "../../images/icon.svg";
 import style from "./OrderDetails.module.css";
 import {useSelector} from "react-redux";
+import types from "../../utils/types";
 
 const OrderDetails = () => {
     const orderNumber = useSelector(store => store.burger.order.orderNumber);

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import style from "./BurgerConstructor.module.css";
 import {
@@ -9,7 +9,6 @@ import {
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import types from "../../utils/types";
 import BurgerConstructorItem from "../BurgerConstructorItem/BurgerConstructorItem";
-import { BurgerConstructorContext } from "../../utils/contexts";
 import {useDispatch, useSelector} from "react-redux";
 import {
     ADD_INGREDIENT_TO_CONSTRUCTOR,
@@ -19,7 +18,6 @@ import {
 import {useDrop} from "react-dnd";
 
 const BurgerConstructor = ({ showOrderDetails }) => {
-    const { burger, makeOrder, price } = useContext(BurgerConstructorContext);
     const scrollableRef = React.useRef();
     const ingredients = useSelector(store => store.burger.constructorIngredients);
     const burgerBun = useSelector(store => store.burger.constructorIngredients)

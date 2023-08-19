@@ -9,6 +9,7 @@ import {
     GET_ORDER_NUMBER_REQUEST,
     GET_ORDER_NUMBER_SUCCESS,
     GET_ORDER_NUMBER_FAILED,
+    REPLACE_INGREDIENTS,
 } from '../actions';
 
 const initialState = {
@@ -89,6 +90,18 @@ export const getIngredientsReducer = (state = initialState, action) => {
                 order: {
                     orderNumber: 0
                 }
+            }
+        }
+        case REPLACE_INGREDIENTS: {
+            const replacedConstructorIngredients = [...state.constructorIngredients];
+            const draggedIngredient = replacedConstructorIngredients[action.payload.dragIndex];
+
+            replacedConstructorIngredients.splice(action.payload.dragIndex, 1);
+            replacedConstructorIngredients.splice(action.payload.hoverIndex, 0, draggedIngredient);
+
+            return {
+                ...state,
+                constructorIngredients: replacedConstructorIngredients
             }
         }
         default: {

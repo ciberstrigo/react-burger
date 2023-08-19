@@ -1,4 +1,4 @@
-// Получение списка ингредиентов от API. Используется в компоненте BurgerIngredients.
+// Получение списка ингредиентов от API. Используется в компоненте BurgerConstructor.
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
@@ -17,6 +17,9 @@ export const DELETE_CURRENT_INGREDIENT = 'DELETE_CURRENT_INGREDIENT';
 export const GET_ORDER_NUMBER_REQUEST = 'GET_ORDER_NUMBER_REQUEST';
 export const GET_ORDER_NUMBER_SUCCESS = 'GET_ORDER_NUMBER_SUCCESS';
 export const GET_ORDER_NUMBER_FAILED = 'GET_ORDER_NUMBER_FAILED';
+
+// Перестановка ингредиентов
+export const REPLACE_INGREDIENTS = 'REPLACE_INGREDIENTS';
 
 const API_URL = "https://norma.nomoreparties.space/api";
 
@@ -82,5 +85,17 @@ export function getOrderNumber(ingredients) {
                 })
                 console.error('Error:', error);
             });
+    }
+}
+
+export const replaceItems = (dragIndex, hoverIndex) => {
+    return function(dispatch) {
+        dispatch({
+            type: REPLACE_INGREDIENTS,
+            payload: {
+                dragIndex: dragIndex,
+                hoverIndex: hoverIndex
+            }
+        })
     }
 }

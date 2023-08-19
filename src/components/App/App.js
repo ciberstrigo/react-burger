@@ -8,6 +8,8 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import {getIngredients, SET_CURRENT_INGREDIENT} from "../../services/actions";
 import {useDispatch, useSelector} from "react-redux";
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
 
 const App = () => {
     const [orderVisible, setOrderVisible] = React.useState(false);
@@ -36,12 +38,14 @@ const App = () => {
     return (
         <div className={style.App__main}>
             <AppHeader />
-            <main className={style.App__content}>
-                <div className={style.App__container}>
-                    <BurgerIngredients showDetails={showIngredientDetails} />
-                    <BurgerConstructor showOrderDetails={toggleOrderDetails} />
-                </div>
-            </main>
+            <DndProvider backend={HTML5Backend}>
+                <main className={style.App__content}>
+                    <div className={style.App__container}>
+                        <BurgerIngredients showDetails={showIngredientDetails} />
+                        <BurgerConstructor showOrderDetails={toggleOrderDetails} />
+                    </div>
+                </main>
+            </DndProvider>
             {orderVisible && (
                 <Modal onClose={toggleOrderDetails}>
                     <OrderDetails />

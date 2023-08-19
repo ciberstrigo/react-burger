@@ -6,8 +6,20 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import types from "../../utils/types";
+import {useSelector} from "react-redux";
+import {useDrag} from "react-dnd";
 
-const BurgerIngredientsItems = ({ data, count, onClick }) => {
+const BurgerIngredientsItems = ({ data, onClick }) => {
+    const ingredients = useSelector(store => store.burger.constructorIngredients)
+        .filter(item => {
+            return item && item._id === data._id;
+        });
+
+    const [, dragRef] = useDrag({
+        type: "ingredient",
+        item: data
+    });
+
     return (
         <li
             key={data._id}
@@ -15,9 +27,10 @@ const BurgerIngredientsItems = ({ data, count, onClick }) => {
             onClick={() => {
                 window.getSelection().toString() === "" && onClick(data);
             }}
+            ref={dragRef}
         >
-            {count > 0 && (
-                <Counter count={count} size="default" extraClass="m-1" />
+            {ingredients.length > 0 && (
+                <Counter count={ingredients.length} size="default" extraClass="m-1" />
             )}
             <img
                 src={data.image}

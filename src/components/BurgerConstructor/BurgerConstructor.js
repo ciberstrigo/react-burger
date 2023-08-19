@@ -54,8 +54,8 @@ const BurgerConstructor = ({ showOrderDetails }) => {
         drop(item) {
             if(item.type === 'bun') {
                 for(let i = 0; i < 2; i++) {
-                    if(burgerBun.length > 0) {
-                        let id = burgerBun[0]._id;
+                    if(burgerBun) {
+                        let id = burgerBun._id;
                         dispatch({
                             type: DELETE_INGREDIENT_FROM_CONSTRUCTOR,
                             id: id
@@ -80,18 +80,18 @@ const BurgerConstructor = ({ showOrderDetails }) => {
         <section className={style.burgerConstructor}>
             <div className={style.burgerConstructor__list} ref={dropTarget}>
                 {
-                    !burgerBun.length && !ingredients.length && (
+                    !burgerBun && !ingredients.length && (
                         <div className={`text text_type_main-default ${style.dropDownField}`}>
                             <p>Перетащите ингредиенты сюда, чтобы начать</p>
                         </div>
                     )
                 }
-                {burgerBun.length > 0 && (
+                {burgerBun && (
                     <ConstructorElement
                         type="top"
-                        text={`${burgerBun[0].name} (верх)`}
-                        price={burgerBun[0].price}
-                        thumbnail={burgerBun[0].image}
+                        text={`${burgerBun.name} (верх)`}
+                        price={burgerBun.price}
+                        thumbnail={burgerBun.image}
                         extraClass={"mr-4"}
                         isLocked={true}
                     />
@@ -109,12 +109,12 @@ const BurgerConstructor = ({ showOrderDetails }) => {
                                 ),
                         )}
                 </div>
-                {burgerBun.length > 1 && (
+                {burgerBun && (
                     <ConstructorElement
                         type="bottom"
-                        text={`${burgerBun[1].name} (низ)`}
-                        price={burgerBun[1].price}
-                        thumbnail={burgerBun[1].image}
+                        text={`${burgerBun.name} (низ)`}
+                        price={burgerBun.price}
+                        thumbnail={burgerBun.image}
                         extraClass={"mr-4"}
                         isLocked={true}
                     />
@@ -130,7 +130,11 @@ const BurgerConstructor = ({ showOrderDetails }) => {
                         size="large"
                         onClick={() => {
                             if(burgerBun && ingredients.length > 2) {
-                                dispatch(getOrderNumber(ingredients));
+                                dispatch(
+                                    getOrderNumber(
+                                        [burgerBun._id, ...ingredients.map(item => item._id), burgerBun._id]
+                                    )
+                                );
                                 showOrderDetails();
                             }
                         }}

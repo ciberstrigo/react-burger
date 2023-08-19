@@ -23,18 +23,17 @@ export const REPLACE_INGREDIENTS = 'REPLACE_INGREDIENTS';
 
 const API_URL = "https://norma.nomoreparties.space/api";
 
+const checkResponse = res => {
+    return res.ok ? res.json() : res.json().then(err => Promise.reject(err));
+};
+
 export const getIngredients = () => {
     return (dispatch) => {
         dispatch({
             type: GET_INGREDIENTS_REQUEST,
         })
         fetch(`${API_URL}/ingredients`)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(`Ошибка ${response.status}`);
-            })
+            .then(checkResponse)
             .then(({ data }) => {
                 dispatch({
                     type: GET_INGREDIENTS_SUCCESS,
@@ -56,23 +55,16 @@ export function getOrderNumber(ingredients) {
             type: GET_ORDER_NUMBER_REQUEST,
         });
 
-        const data = {
-            "ingredients": ingredients.map(item => item._id)
-        };
-
         fetch(`${API_URL}/orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                ingredients
+            }),
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка ${res.status}`);
-            })
+            .then(checkResponse)
             .then(data => {
                 dispatch({
                     type: GET_ORDER_NUMBER_SUCCESS,

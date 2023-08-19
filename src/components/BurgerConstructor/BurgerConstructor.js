@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import PropTypes from "prop-types";
 import style from "./BurgerConstructor.module.css";
 import {
@@ -19,9 +19,14 @@ import {useDrop} from "react-dnd";
 
 const BurgerConstructor = ({ showOrderDetails }) => {
     const scrollableRef = React.useRef();
-    const ingredients = useSelector(store => store.burger.constructorIngredients);
-    const burgerBun = useSelector(store => store.burger.constructorIngredients)
-        .filter(item => {return item && item.type === 'bun'});
+    const data = useSelector(store => store.burger.constructorIngredients);
+
+    const { burgerBun, ingredients } = useMemo(() => {
+        return {
+            burgerBun: data.find(item => item.type === 'bun'),
+            ingredients: data.filter(item => item.type !== 'bun'),
+        };
+    }, [data]);
 
     let total = useSelector(store => store.burger.constructorIngredients)
         .reduce((acc, { price }) =>  {

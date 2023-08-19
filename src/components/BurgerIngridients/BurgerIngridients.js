@@ -4,11 +4,10 @@ import BurgerIngredientsItem from "../BurgerIngredientsItem/BurgerIngredientsIte
 import style from "./BurgerIngridients.module.css";
 import PropTypes from "prop-types";
 import types from "../../utils/types";
+import {useSelector} from "react-redux";
 import {BurgerIngredientsContext} from "../../utils/contexts";
 
-const BurgerIngredients = () => {
-    const { assortment, showDetails } = useContext(BurgerIngredientsContext);
-
+const BurgerIngredients = ({ showDetails }) => {
     const tabs = [
         {
             name: "bun",
@@ -25,6 +24,7 @@ const BurgerIngredients = () => {
     ];
 
     const [current, setCurrent] = React.useState(tabs[0].name);
+    const ingredients = useSelector(store => store.burger.ingredients);
 
     return (
         <section className={style.ingredients}>
@@ -50,8 +50,8 @@ const BurgerIngredients = () => {
                             {category.title}
                         </h1>
                         <ul className={style.ingredients__list__collection}>
-                            {assortment &&
-                                assortment
+                            {ingredients &&
+                                ingredients
                                     .filter(
                                         (position) =>
                                             position.type === category.name,

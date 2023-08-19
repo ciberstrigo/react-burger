@@ -10,15 +10,22 @@ import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import types from "../../utils/types";
 import BurgerConstructorItem from "../BurgerConstructorItem/BurgerConstructorItem";
 import { BurgerConstructorContext } from "../../utils/contexts";
+import {useDispatch, useSelector} from "react-redux";
+import {getOrderNumber} from "../../services/actions";
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({ showOrderDetails }) => {
     const { burger, makeOrder, price } = useContext(BurgerConstructorContext);
     const scrollableRef = React.useRef();
+    const ingredients = useSelector(store => store.burger.constructorIngredients);
+    const burgerBun = useSelector(store => store.burger.constructorIngredients)
+        .filter(item => item.type === 'bun');
 
     const adjustContainerHeight = () => {
         const height = window.innerHeight - (window.innerHeight % 90);
         scrollableRef.current.style.maxHeight = `calc(${height}px - 640px)`;
     };
+
+    const dispatch = useDispatch();
 
     React.useEffect(() => {
         adjustContainerHeight();
@@ -75,7 +82,12 @@ const BurgerConstructor = () => {
                         htmlType="button"
                         type="primary"
                         size="large"
-                        onClick={makeOrder}
+                        onClick={() => {
+                            if(burgerBun && ingredients.length > 2) {
+                                dispatch(getOrderNumber(ingredients));
+                                showOrderDetails();
+                            }
+                        }}
                     >
                         Оформить заказ
                     </Button>

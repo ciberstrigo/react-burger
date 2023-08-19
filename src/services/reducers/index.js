@@ -15,7 +15,7 @@ import {
 const initialState = {
     ingredients: [],
     constructorIngredients: [],
-    currentIngredient: {},
+    currentIngredient: null,
     order: {
         orderNumber: 0
     }
@@ -51,7 +51,7 @@ export const getIngredientsReducer = (state = initialState, action) => {
         case DELETE_CURRENT_INGREDIENT: {
             return {
                 ...state,
-                currentIngredient: {}
+                currentIngredient: null
             }
         }
         // Добавление и удаление ингредиента из конструктора

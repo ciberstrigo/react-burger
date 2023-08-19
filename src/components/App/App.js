@@ -31,10 +31,6 @@ const App = () => {
         })
     };
 
-    const isIngredientModalVisible = () => {
-        return Object.keys(currentIngredient).length !== 0 && currentIngredient.constructor === Object;
-    };
-
     return (
         <div className={style.App__main}>
             <AppHeader />
@@ -51,11 +47,11 @@ const App = () => {
                     <OrderDetails />
                 </Modal>
             )}
-            { ( isIngredientModalVisible() &&
+            { ( currentIngredient &&
                 <Modal
                     header={"Детали ингредиента"}
                     onClose={() => {
-                        showIngredientDetails({});
+                        showIngredientDetails(null);
                     }}
                 >
                     <IngredientDetails ingredient={currentIngredient} />

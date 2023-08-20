@@ -10,99 +10,113 @@ import {
     GET_ORDER_NUMBER_SUCCESS,
     GET_ORDER_NUMBER_FAILED,
     REPLACE_INGREDIENTS,
-} from '../actions';
+} from "../actions";
 
 const initialState = {
     ingredients: [],
     constructorIngredients: [],
     currentIngredient: null,
     order: {
-        orderNumber: 0
-    }
+        orderNumber: 0,
+    },
 };
 
 export const getIngredientsReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         // Ингредиенты (слева)
         // TODO сюда можно подцепить каку-нибудь флаг-переменную и по ней показывать "загрузка..."
         case GET_INGREDIENTS_REQUEST: {
             return {
-                ...state
-            }
+                ...state,
+            };
         }
         case GET_INGREDIENTS_SUCCESS: {
             return {
                 ...state,
-                ingredients: action.data
-            }
+                ingredients: action.data,
+            };
         }
         case GET_INGREDIENTS_FAILED: {
             return {
-                ...initialState
-            }
+                ...initialState,
+            };
         }
         // Модальное окно ингредиента
         case SET_CURRENT_INGREDIENT: {
             return {
                 ...state,
-                currentIngredient: action.currentIngredient
-            }
+                currentIngredient: action.currentIngredient,
+            };
         }
         case DELETE_CURRENT_INGREDIENT: {
             return {
                 ...state,
-                currentIngredient: null
-            }
+                currentIngredient: null,
+            };
         }
         // Добавление и удаление ингредиента из конструктора
         case ADD_INGREDIENT_TO_CONSTRUCTOR: {
             return {
                 ...state,
-                constructorIngredients: [...state.constructorIngredients, action.draggedIngredient]
-            }
+                constructorIngredients: [
+                    ...state.constructorIngredients,
+                    action.draggedIngredient,
+                ],
+            };
         }
         case DELETE_INGREDIENT_FROM_CONSTRUCTOR: {
-            let itemToDeleteIndex = state.constructorIngredients.map(item => item._id).indexOf(action.id);
+            let itemToDeleteIndex = state.constructorIngredients
+                .map((item) => item._id)
+                .indexOf(action.id);
 
             return {
                 ...state,
-                constructorIngredients: state.constructorIngredients.filter((item,index) => index !== itemToDeleteIndex )
-            }
+                constructorIngredients: state.constructorIngredients.filter(
+                    (item, index) => index !== itemToDeleteIndex,
+                ),
+            };
         }
         // Получение номера заказа
         case GET_ORDER_NUMBER_REQUEST: {
             return {
-                ...state
-            }
+                ...state,
+            };
         }
         case GET_ORDER_NUMBER_SUCCESS: {
             return {
                 ...state,
                 order: {
                     ...state.order,
-                    orderNumber: action.orderNumber
-                }
-            }
+                    orderNumber: action.orderNumber,
+                },
+            };
         }
         case GET_ORDER_NUMBER_FAILED: {
             return {
                 ...state,
                 order: {
-                    orderNumber: 0
-                }
-            }
+                    orderNumber: 0,
+                },
+            };
         }
         case REPLACE_INGREDIENTS: {
-            const replacedConstructorIngredients = [...state.constructorIngredients];
-            const draggedIngredient = replacedConstructorIngredients[action.payload.dragIndex];
+            const replacedConstructorIngredients = [
+                ...state.constructorIngredients,
+            ];
+            const draggedIngredient =
+                replacedConstructorIngredients[action.payload.dragIndex];
 
             replacedConstructorIngredients.splice(action.payload.dragIndex, 1);
-            replacedConstructorIngredients.splice(action.payload.hoverIndex, 0, draggedIngredient);
+            replacedConstructorIngredients.splice(
+                action.payload.hoverIndex,
+                0,
+                draggedIngredient,
+            );
 
             return {
                 ...state,
-                constructorIngredients: replacedConstructorIngredients
-            }
+                constructorIngredients: replacedConstructorIngredients,
+            };
         }
         default: {
             return state;

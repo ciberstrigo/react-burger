@@ -11,22 +11,22 @@ const ingredient = PropTypes.shape({
     carbohydrates: PropTypes.number.isRequired,
     fat: PropTypes.number.isRequired,
     proteins: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired
-})
+    type: PropTypes.string.isRequired,
+});
 
 const types = {
     ingredient: ingredient,
     order: PropTypes.shape({
         name: PropTypes.string.isRequired,
         order: PropTypes.shape({
-            number: PropTypes.number.isRequired
+            number: PropTypes.number.isRequired,
         }).isRequired,
-        success: PropTypes.bool.isRequired
+        success: PropTypes.bool.isRequired,
     }),
     burger: PropTypes.shape({
         bun: ingredient.isRequired,
-        ingredients: PropTypes.arrayOf(ingredient).isRequired
-    })
+        ingredients: PropTypes.arrayOf(ingredient).isRequired,
+    }),
 };
 
 export default types;

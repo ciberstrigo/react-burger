@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import style from "./BurgerConstructor.module.css";
 import {
@@ -9,29 +9,30 @@ import {
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import types from "../../utils/types";
 import BurgerConstructorItem from "../BurgerConstructorItem/BurgerConstructorItem";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     ADD_INGREDIENT_TO_CONSTRUCTOR,
     DELETE_INGREDIENT_FROM_CONSTRUCTOR,
-    getOrderNumber
+    getOrderNumber,
 } from "../../services/actions";
-import {useDrop} from "react-dnd";
+import { useDrop } from "react-dnd";
 
 const BurgerConstructor = ({ showOrderDetails }) => {
     const scrollableRef = React.useRef();
-    const data = useSelector(store => store.burger.constructorIngredients);
+    const data = useSelector((store) => store.burger.constructorIngredients);
 
     const { burgerBun, ingredients } = useMemo(() => {
         return {
-            burgerBun: data.find(item => item.type === 'bun'),
-            ingredients: data.filter(item => item.type !== 'bun'),
+            burgerBun: data.find((item) => item.type === "bun"),
+            ingredients: data.filter((item) => item.type !== "bun"),
         };
     }, [data]);
 
-    let total = useSelector(store => store.burger.constructorIngredients)
-        .reduce((acc, { price }) =>  {
-            return acc + parseInt(price)
-        }, 0);
+    let total = useSelector(
+        (store) => store.burger.constructorIngredients,
+    ).reduce((acc, { price }) => {
+        return acc + parseInt(price);
+    }, 0);
 
     const adjustContainerHeight = () => {
         const height = window.innerHeight - (window.innerHeight % 90);
@@ -52,25 +53,24 @@ const BurgerConstructor = ({ showOrderDetails }) => {
     const [, dropTarget] = useDrop({
         accept: "ingredient",
         drop(item) {
-            if(item.type === 'bun') {
-                for(let i = 0; i < 2; i++) {
-                    if(burgerBun) {
+            if (item.type === "bun") {
+                for (let i = 0; i < 2; i++) {
+                    if (burgerBun) {
                         let id = burgerBun._id;
                         dispatch({
                             type: DELETE_INGREDIENT_FROM_CONSTRUCTOR,
-                            id: id
+                            id: id,
                         });
                     }
                     dispatch({
                         type: ADD_INGREDIENT_TO_CONSTRUCTOR,
-                        draggedIngredient: item
+                        draggedIngredient: item,
                     });
                 }
-            }
-            else {
+            } else {
                 dispatch({
                     type: ADD_INGREDIENT_TO_CONSTRUCTOR,
-                    draggedIngredient: item
+                    draggedIngredient: item,
                 });
             }
         },
@@ -79,13 +79,13 @@ const BurgerConstructor = ({ showOrderDetails }) => {
     return (
         <section className={style.burgerConstructor}>
             <div className={style.burgerConstructor__list} ref={dropTarget}>
-                {
-                    !burgerBun && !ingredients.length && (
-                        <div className={`text text_type_main-default ${style.dropDownField}`}>
-                            <p>Перетащите ингредиенты сюда, чтобы начать</p>
-                        </div>
-                    )
-                }
+                {!burgerBun && !ingredients.length && (
+                    <div
+                        className={`text text_type_main-default ${style.dropDownField}`}
+                    >
+                        <p>Перетащите ингредиенты сюда, чтобы начать</p>
+                    </div>
+                )}
                 {burgerBun && (
                     <ConstructorElement
                         type="top"
@@ -121,7 +121,9 @@ const BurgerConstructor = ({ showOrderDetails }) => {
                 )}
                 <div className={style.makeOrderBlock}>
                     <div className={style.priceBlock}>
-                        <span className={style.priceBlock__number}>{total}</span>
+                        <span className={style.priceBlock__number}>
+                            {total}
+                        </span>
                         <CurrencyIcon type="primary" />
                     </div>
                     <Button
@@ -129,11 +131,13 @@ const BurgerConstructor = ({ showOrderDetails }) => {
                         type="primary"
                         size="large"
                         onClick={() => {
-                            if(burgerBun && ingredients.length > 2) {
+                            if (burgerBun && ingredients.length > 2) {
                                 dispatch(
-                                    getOrderNumber(
-                                        [burgerBun._id, ...ingredients.map(item => item._id), burgerBun._id]
-                                    )
+                                    getOrderNumber([
+                                        burgerBun._id,
+                                        ...ingredients.map((item) => item._id),
+                                        burgerBun._id,
+                                    ]),
                                 );
                                 showOrderDetails();
                             }

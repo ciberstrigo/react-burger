@@ -6,14 +6,16 @@ import style from "./App.module.css";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import OrderDetails from "../OrderDetails/OrderDetails";
-import {getIngredients, SET_CURRENT_INGREDIENT} from "../../services/actions";
-import {useDispatch, useSelector} from "react-redux";
-import {DndProvider} from "react-dnd";
-import {HTML5Backend} from "react-dnd-html5-backend";
+import { getIngredients, SET_CURRENT_INGREDIENT } from "../../services/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const App = () => {
     const [orderVisible, setOrderVisible] = React.useState(false);
-    const currentIngredient = useSelector(store => store.burger.currentIngredient);
+    const currentIngredient = useSelector(
+        (store) => store.burger.currentIngredient,
+    );
     const dispatch = useDispatch();
 
     React.useEffect(() => {
@@ -27,8 +29,8 @@ const App = () => {
     const showIngredientDetails = (ingredient) => {
         dispatch({
             type: SET_CURRENT_INGREDIENT,
-            currentIngredient: ingredient ?? null
-        })
+            currentIngredient: ingredient ?? null,
+        });
     };
 
     return (
@@ -37,8 +39,12 @@ const App = () => {
             <DndProvider backend={HTML5Backend}>
                 <main className={style.App__content}>
                     <div className={style.App__container}>
-                        <BurgerIngredients showDetails={showIngredientDetails} />
-                        <BurgerConstructor showOrderDetails={toggleOrderDetails} />
+                        <BurgerIngredients
+                            showDetails={showIngredientDetails}
+                        />
+                        <BurgerConstructor
+                            showOrderDetails={toggleOrderDetails}
+                        />
                     </div>
                 </main>
             </DndProvider>
@@ -47,7 +53,7 @@ const App = () => {
                     <OrderDetails />
                 </Modal>
             )}
-            { ( currentIngredient &&
+            {currentIngredient && (
                 <Modal
                     header={"Детали ингредиента"}
                     onClose={() => {

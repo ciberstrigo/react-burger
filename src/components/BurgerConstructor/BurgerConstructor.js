@@ -131,7 +131,7 @@ const BurgerConstructor = ({ showOrderDetails }) => {
                         type="primary"
                         size="large"
                         onClick={() => {
-                            if (burgerBun && ingredients.length > 2) {
+                            if (burgerBun) {
                                 dispatch(
                                     getOrderNumber([
                                         burgerBun._id,

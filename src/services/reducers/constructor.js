@@ -2,7 +2,7 @@ import {
     ADD_INGREDIENT_TO_CONSTRUCTOR,
     DELETE_INGREDIENT_FROM_CONSTRUCTOR,
     REPLACE_INGREDIENTS,
-} from "../actions";
+} from "../actions/constructor";
 
 const initialState = {
     ingredients: [],
@@ -13,10 +13,7 @@ export const constructorReducer = (state = initialState, action) => {
         case ADD_INGREDIENT_TO_CONSTRUCTOR: {
             return {
                 ...state,
-                ingredients: [
-                    ...state.ingredients,
-                    action.draggedIngredient,
-                ],
+                ingredients: [...state.ingredients, action.draggedIngredient],
             };
         }
         case DELETE_INGREDIENT_FROM_CONSTRUCTOR: {
@@ -32,9 +29,7 @@ export const constructorReducer = (state = initialState, action) => {
             };
         }
         case REPLACE_INGREDIENTS: {
-            const replacedConstructorIngredients = [
-                ...state.ingredients,
-            ];
+            const replacedConstructorIngredients = [...state.ingredients];
             const draggedIngredient =
                 replacedConstructorIngredients[action.payload.dragIndex];
 

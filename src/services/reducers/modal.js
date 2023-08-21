@@ -1,7 +1,5 @@
-import {
-    DELETE_CURRENT_INGREDIENT,
-    SET_CURRENT_INGREDIENT,
-} from "../actions";
+import { DELETE_CURRENT_INGREDIENT } from "../actions/constructor";
+import { SET_CURRENT_INGREDIENT } from "../actions/ingredientInfo";
 
 const initialState = {
     currentIngredient: null,

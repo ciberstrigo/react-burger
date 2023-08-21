@@ -8,8 +8,9 @@ import types from "../../utils/types";
 import { useDispatch } from "react-redux";
 import {
     DELETE_INGREDIENT_FROM_CONSTRUCTOR,
-    replaceItems,
-} from "../../services/actions";
+    replaceItems
+} from "../../services/actions/constructor";
+
 import { useDrag, useDrop } from "react-dnd";
 import PropTypes from "prop-types";
 

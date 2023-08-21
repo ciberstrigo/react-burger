@@ -2,7 +2,7 @@ import {
     GET_ORDER_NUMBER_FAILED,
     GET_ORDER_NUMBER_REQUEST,
     GET_ORDER_NUMBER_SUCCESS,
-} from "../actions";
+} from "../actions/applyOrder";
 
 const initialState = {
     order: {

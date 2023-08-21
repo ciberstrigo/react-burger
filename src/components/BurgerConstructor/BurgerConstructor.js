@@ -10,11 +10,12 @@ import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import types from "../../utils/types";
 import BurgerConstructorItem from "../BurgerConstructorItem/BurgerConstructorItem";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
     ADD_INGREDIENT_TO_CONSTRUCTOR,
     DELETE_INGREDIENT_FROM_CONSTRUCTOR,
-    getOrderNumber,
-} from "../../services/actions";
+} from "../../services/actions/constructor";
+import { applyOrder } from "../../services/actions/applyOrder";
 import { useDrop } from "react-dnd";
 
 const BurgerConstructor = ({ showOrderDetails }) => {
@@ -133,7 +134,7 @@ const BurgerConstructor = ({ showOrderDetails }) => {
                         onClick={() => {
                             if (burgerBun) {
                                 dispatch(
-                                    getOrderNumber([
+                                    applyOrder([
                                         burgerBun._id,
                                         ...ingredients.map((item) => item._id),
                                         burgerBun._id,

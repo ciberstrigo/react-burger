@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import types from "../../utils/types";
 
 const OrderDetails = () => {
-    const orderNumber = useSelector((store) => store.burger.order.orderNumber);
+    const orderNumber = useSelector((store) => store.burger.orderReducer.order.orderNumber);//x
 
     return (
         <div className={style.OrderDetails__content}>

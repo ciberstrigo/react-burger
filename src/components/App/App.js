@@ -13,8 +13,8 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 const App = () => {
     const [orderVisible, setOrderVisible] = React.useState(false);
-    const currentIngredient = useSelector(
-        (store) => store.burger.currentIngredient,
+    const currentIngredient = useSelector(//x
+        (store) => store.burger.modalReducer.currentIngredient,
     );
     const dispatch = useDispatch();
 

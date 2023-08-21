@@ -19,7 +19,7 @@ import { useDrop } from "react-dnd";
 
 const BurgerConstructor = ({ showOrderDetails }) => {
     const scrollableRef = React.useRef();
-    const data = useSelector((store) => store.burger.constructorIngredients);
+    const data = useSelector((store) => store.burger.constructorReducer.ingredients);
 
     const { burgerBun, ingredients } = useMemo(() => {
         return {
@@ -28,8 +28,8 @@ const BurgerConstructor = ({ showOrderDetails }) => {
         };
     }, [data]);
 
-    let total = useSelector(
-        (store) => store.burger.constructorIngredients,
+    let total = useSelector(//x
+        (store) => store.burger.constructorReducer.ingredients,
     ).reduce((acc, { price }) => {
         return acc + parseInt(price);
     }, 0);

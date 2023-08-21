@@ -31,7 +31,7 @@ const BurgerIngredients = ({ showDetails }) => {
         main: React.useRef(null),
     };
 
-    const ingredients = useSelector((store) => store.burger.ingredients);
+    const ingredients = useSelector((store) => store.burger.ingredientsReducer.ingredients);//x
 
     const handleScroll = () => {
         const scrollContainerPosition =

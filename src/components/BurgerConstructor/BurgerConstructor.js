@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import style from "./BurgerConstructor.module.css";
 import {
@@ -9,16 +9,38 @@ import {
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import types from "../../utils/types";
 import BurgerConstructorItem from "../BurgerConstructorItem/BurgerConstructorItem";
-import { BurgerConstructorContext } from "../../utils/burgerConstructorContext";
+import { useDispatch, useSelector } from "react-redux";
 
-const BurgerConstructor = () => {
-    const { burger, makeOrder, price } = useContext(BurgerConstructorContext);
+import {
+    ADD_INGREDIENT_TO_CONSTRUCTOR,
+    DELETE_INGREDIENT_FROM_CONSTRUCTOR,
+} from "../../services/actions/constructor";
+import { applyOrder } from "../../services/actions/applyOrder";
+import { useDrop } from "react-dnd";
+
+const BurgerConstructor = ({ showOrderDetails }) => {
     const scrollableRef = React.useRef();
+    const data = useSelector((store) => store.burger.constructorReducer.ingredients);
+
+    const { burgerBun, ingredients } = useMemo(() => {
+        return {
+            burgerBun: data.find((item) => item.type === "bun"),
+            ingredients: data.filter((item) => item.type !== "bun"),
+        };
+    }, [data]);
+
+    let total = useSelector(//x
+        (store) => store.burger.constructorReducer.ingredients,
+    ).reduce((acc, { price }) => {
+        return acc + parseInt(price);
+    }, 0);
 
     const adjustContainerHeight = () => {
         const height = window.innerHeight - (window.innerHeight % 90);
         scrollableRef.current.style.maxHeight = `calc(${height}px - 640px)`;
     };
+
+    const dispatch = useDispatch();
 
     React.useEffect(() => {
         adjustContainerHeight();
@@ -29,37 +51,71 @@ const BurgerConstructor = () => {
         };
     });
 
+    const [, dropTarget] = useDrop({
+        accept: "ingredient",
+        drop(item) {
+            if (item.type === "bun") {
+                for (let i = 0; i < 2; i++) {
+                    if (burgerBun) {
+                        let id = burgerBun._id;
+                        dispatch({
+                            type: DELETE_INGREDIENT_FROM_CONSTRUCTOR,
+                            id: id,
+                        });
+                    }
+                    dispatch({
+                        type: ADD_INGREDIENT_TO_CONSTRUCTOR,
+                        draggedIngredient: item,
+                    });
+                }
+            } else {
+                dispatch({
+                    type: ADD_INGREDIENT_TO_CONSTRUCTOR,
+                    draggedIngredient: item,
+                });
+            }
+        },
+    });
+
     return (
         <section className={style.burgerConstructor}>
-            <div className={style.burgerConstructor__list}>
-                {!!burger.bun && (
+            <div className={style.burgerConstructor__list} ref={dropTarget}>
+                {!burgerBun && !ingredients.length && (
+                    <div
+                        className={`text text_type_main-default ${style.dropDownField}`}
+                    >
+                        <p>Перетащите ингредиенты сюда, чтобы начать</p>
+                    </div>
+                )}
+                {burgerBun && (
                     <ConstructorElement
                         type="top"
-                        text={`${burger.bun.name} (верх)`}
-                        price={burger.bun.price}
-                        thumbnail={burger.bun.image}
+                        text={`${burgerBun.name} (верх)`}
+                        price={burgerBun.price}
+                        thumbnail={burgerBun.image}
                         extraClass={"mr-4"}
                         isLocked={true}
                     />
                 )}
                 <div className={`${style.scrollable}`} ref={scrollableRef}>
-                    {burger.ingredients &&
-                        burger.ingredients.map(
-                            (e) =>
+                    {ingredients &&
+                        ingredients.map(
+                            (e, index) =>
                                 e.type !== "bun" && (
                                     <BurgerConstructorItem
                                         item={e}
-                                        key={e._id}
+                                        key={index}
+                                        index={index}
                                     />
                                 ),
                         )}
                 </div>
-                {!!burger.bun && (
+                {burgerBun && (
                     <ConstructorElement
                         type="bottom"
-                        text={`${burger.bun.name} (низ)`}
-                        price={burger.bun.price}
-                        thumbnail={burger.bun.image}
+                        text={`${burgerBun.name} (низ)`}
+                        price={burgerBun.price}
+                        thumbnail={burgerBun.image}
                         extraClass={"mr-4"}
                         isLocked={true}
                     />
@@ -67,7 +123,7 @@ const BurgerConstructor = () => {
                 <div className={style.makeOrderBlock}>
                     <div className={style.priceBlock}>
                         <span className={style.priceBlock__number}>
-                            {price}
+                            {total}
                         </span>
                         <CurrencyIcon type="primary" />
                     </div>
@@ -75,7 +131,18 @@ const BurgerConstructor = () => {
                         htmlType="button"
                         type="primary"
                         size="large"
-                        onClick={makeOrder}
+                        onClick={() => {
+                            if (burgerBun) {
+                                dispatch(
+                                    applyOrder([
+                                        burgerBun._id,
+                                        ...ingredients.map((item) => item._id),
+                                        burgerBun._id,
+                                    ]),
+                                );
+                                showOrderDetails();
+                            }
+                        }}
                     >
                         Оформить заказ
                     </Button>

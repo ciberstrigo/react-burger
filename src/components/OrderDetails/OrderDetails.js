@@ -2,15 +2,18 @@ import React from "react";
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import icon from "../../images/icon.svg";
 import style from "./OrderDetails.module.css";
+import { useSelector } from "react-redux";
 import types from "../../utils/types";
 
-const OrderDetails = ({ details }) => {
+const OrderDetails = () => {
+    const orderNumber = useSelector((store) => store.burger.orderReducer.order.orderNumber);//x
+
     return (
         <div className={style.OrderDetails__content}>
             <p
                 className={`text text_type_digits-large ${style.OrderDetails__number}`}
             >
-                {details.order.number}
+                {orderNumber}
             </p>
             <h2 className={"pt-8 text text_type_main-medium"}>
                 идентификатор заказа

@@ -5,6 +5,7 @@ import {rootReducer} from "./services/reducers/rootReducer";
 import { Provider } from 'react-redux';
 import {applyMiddleware, compose, createStore} from "redux";
 import thunk from "redux-thunk";
+import { BrowserRouter as Router } from 'react-router-dom';
 
 // Интеграция react-devtools
 const composeEnhancers =
@@ -17,5 +18,9 @@ const enhancer = composeEnhancers(applyMiddleware(thunk));
 const store = createStore(rootReducer, enhancer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const element = <Provider store={store}><App /></Provider>;
+const element = <Provider store={store}>
+    <Router>
+        <App />
+    </Router>
+</Provider>;
 root.render(element);

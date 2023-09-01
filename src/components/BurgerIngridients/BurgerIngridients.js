@@ -33,6 +33,8 @@ const BurgerIngredients = ({ showDetails }) => {
 
     const ingredients = useSelector((store) => store.burger.ingredientsReducer.ingredients);//x
 
+
+
     const handleScroll = () => {
         const scrollContainerPosition =
             scrollContainerRef.current.getBoundingClientRect().top;

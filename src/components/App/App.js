@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import AppHeader from "../AppHeaders/AppHeader";
 import style from "./App.module.css";
 import Modal from "../Modal/Modal";
@@ -8,9 +8,8 @@ import { getIngredients } from "../../services/actions/getIngredients";
 import { useDispatch, useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { Route, Routes, useLocation } from 'react-router-dom';
+import {Route, Routes, useLocation, useNavigate} from 'react-router-dom';
 import HomePage from "../../pages/HomePage/homePage";
-import {SET_CURRENT_INGREDIENT} from "../../services/actions/ingredientInfo";
 import PageNotFound from "../../pages/PageNotFound/pageNotFound";
 import Login from "../../pages/Login/login";
 import Register from "../../pages/Register/register";
@@ -22,28 +21,24 @@ import ProtectedRouteElement from "../ProtectedRouteElement/ProtectedRouteElemen
 
 const App = () => {
     const [orderVisible, setOrderVisible] = React.useState(false);
-    const currentIngredient = useSelector(
-        (store) => store.burger.modalReducer.currentIngredient,
-    );
     const dispatch = useDispatch();
     const location = useLocation();
-
-    let background = location.state;
-
-    if (location.state) {
-        background = location.state.background;
-    }
+    const navigate = useNavigate();
+    const background = location.state && location.state.background;
 
     const toggleOrderDetails = () => {
         setOrderVisible(!orderVisible);
     };
 
     const showIngredientDetails = (ingredient) => {
-        dispatch({
-            type: SET_CURRENT_INGREDIENT,
-            currentIngredient: ingredient ?? null,
+        navigate(`/ingredients/${ingredient._id}`, {
+            state: { background: location },
         });
     };
+
+    const modalClose = useCallback(() => {
+        navigate(-1);
+    }, [navigate]);
 
     React.useEffect(() => {
         dispatch(getIngredients());
@@ -67,21 +62,27 @@ const App = () => {
                 <Route path="/reset-password" exact={true} element={<ResetPassword />} />
                 <Route path="/logout" exact={true} element={<Logout />} />
                 <Route path="/profile" exact={true} element={<ProtectedRouteElement><Profile /></ProtectedRouteElement>} />
+                <Route path={"/ingredients/:ingredientId"} element={<IngredientDetails header="Детали ингредиента"/>}/>
             </Routes>
             {orderVisible && (
                 <Modal onClose={toggleOrderDetails}>
                     <OrderDetails />
                 </Modal>
             )}
-            {currentIngredient && (
-                <Modal
-                    header={"Детали ингредиента"}
-                    onClose={() => {
-                        showIngredientDetails(null);
-                    }}
-                >
-                    <IngredientDetails ingredient={currentIngredient} />
-                </Modal>
+            {background && (
+                <Routes>
+                    <Route
+                        path="/ingredients/:ingredientId"
+                        element={
+                            <Modal
+                                header={"Детали ингредиента"}
+                                onClose={modalClose}
+                            >
+                                <IngredientDetails modal/>
+                            </Modal>
+                        }
+                    />
+                </Routes>
             )}
         </div>
     );

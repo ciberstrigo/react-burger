@@ -1,5 +1,3 @@
-import {getCookie} from "./cookies";
-
 const API_URL = "https://norma.nomoreparties.space/api";
 
 const checkResponse = (res) => {
@@ -9,15 +7,16 @@ const checkResponse = (res) => {
     return Promise.reject(`Ошибка ${res.status} ${res.statusText}`)
 }
 
-const recieveIngredients = () => {
+const receiveIngredients = () => {
     return fetch(`${API_URL}/ingredients`).then(checkResponse);
 };
 
-function recieveOrderNumber(ingredients) {
+function receiveOrderNumber(token, ingredients) {
     return fetch(`${API_URL}/orders`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            'authorization': token,
         },
         body: JSON.stringify({
             ingredients,
@@ -124,8 +123,8 @@ function getToken(refreshToken) {
 }
 
 export {
-    recieveIngredients,
-    recieveOrderNumber,
+    receiveIngredients,
+    receiveOrderNumber,
     register,
     login,
     logout,

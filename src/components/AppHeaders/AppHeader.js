@@ -6,7 +6,7 @@ import {
     ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./AppHeader.module.css";
-import {Link, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const AppHeader = () => {
     const navLinkClassName = ({ isActive }) => {

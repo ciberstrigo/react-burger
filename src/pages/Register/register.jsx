@@ -76,7 +76,7 @@ const Register = () => {
                         errorText={'Ошибка'}
                         size={'default'}
                     />
-                    <Button type="primary" size="medium">
+                    <Button type="primary" size="medium" htmlType={"submit"}>
                         Зарегистироваться
                     </Button>
                 </form>

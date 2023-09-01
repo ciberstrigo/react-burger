@@ -67,7 +67,7 @@ const Login = () => {
                     </Button>
                 </form>
                 <div className={`${styles.logging} mb-4`}>
-                    <span className="text_type_main-default">Вы — новый пользователь?</span>
+                    <span className="text_type_main-default">Вы — новый пользователь?</span>
                     <Link to="/register" className={`${styles.link} ml-2 text_type_main-default`}>Зарегистироваться</Link>
                 </div>
                 <div className={styles.logging}>

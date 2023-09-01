@@ -1,11 +1,10 @@
-import React, {useEffect} from "react";
+import React from "react";
 import style from "./IngredientDetails.module.css";
-import types from "../../utils/types";
 import {useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import PropTypes from "prop-types";
 
-const IngredientDetails = ({ modal }) => {
+const IngredientDetails = () => {
     const { ingredientId } = useParams();
     const ingredients = useSelector(store => {
         return store.burger.ingredientsReducer.ingredients;

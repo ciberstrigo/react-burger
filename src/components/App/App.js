@@ -5,7 +5,7 @@ import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import { getIngredients } from "../../services/actions/getIngredients";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import {Route, Routes, useLocation, useNavigate} from 'react-router-dom';
@@ -78,7 +78,7 @@ const App = () => {
                                 header={"Детали ингредиента"}
                                 onClose={modalClose}
                             >
-                                <IngredientDetails modal/>
+                                <IngredientDetails/>
                             </Modal>
                         }
                     />

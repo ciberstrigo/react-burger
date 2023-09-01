@@ -1,8 +1,7 @@
 import React from "react";
-import {deleteCookie, setCookie} from "../../utils/cookies";
-import {Navigate, useNavigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {loggingOut} from "../../services/actions/user";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 
 const Logout = () => {
     useDispatch()(loggingOut());

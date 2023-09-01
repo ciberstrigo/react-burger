@@ -21,7 +21,7 @@ export function register({ email, password, name }) {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 dispatch({ type: IS_FAILED });
             });
     };
@@ -42,7 +42,7 @@ export function loginning({ email, password }) {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 dispatch({ type: IS_FAILED });
             });
     };
@@ -61,7 +61,7 @@ export function loggingOut() {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 dispatch({ type: IS_FAILED });
             });
     };
@@ -81,7 +81,7 @@ export function forgotPassword(email, navigate) {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 dispatch({ type: IS_FAILED });
             });
     };
@@ -98,7 +98,7 @@ export function resetPassword(password, token, navigate) {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 dispatch({ type: IS_FAILED });
             });
     };
@@ -119,7 +119,7 @@ export function getUserInfo(formData, setFormData) {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 dispatch({ type: IS_FAILED });
             });
     };
@@ -141,7 +141,7 @@ export function updateUserInfo(formData) {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 dispatch({ type: IS_FAILED });
             });
     };
@@ -161,7 +161,7 @@ export function getToken() {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 dispatch({ type: IS_FAILED });
             });
     };

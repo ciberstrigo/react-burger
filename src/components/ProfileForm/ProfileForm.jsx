@@ -31,8 +31,8 @@ export default function ProfileForm() {
             dispatch(getUserInfo(formData, setFormData));
         }
 
-        return () => mounted = false;
-    }, []);
+        return () => {mounted = false};
+    }, [dispatch, formData]);
 
     const onCancel = (e) => {
         e.preventDefault();

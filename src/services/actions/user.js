@@ -1,167 +1,168 @@
-import {
-    getCookie,
-    setCookie,
-    deleteCookie
-} from "../../utils/cookies";
+import { getCookie, setCookie, deleteCookie } from "../../utils/cookies";
 
 import * as api from "../../utils/api";
 
-export const IS_REQUESTING = 'IS_REQUESTING';
-export const IS_FAILED = 'IS_FAILED';
-export const IS_SUCCESSFUL = 'IS_SUCCESSFUL';
+export const IS_REQUESTING = "IS_REQUESTING";
+export const IS_FAILED = "IS_FAILED";
+export const IS_SUCCESSFUL = "IS_SUCCESSFUL";
 
 export function register({ email, password, name }) {
     return function (dispatch) {
         dispatch({ type: IS_REQUESTING });
         api.register({ email, password, name })
-            .then(res => {
+            .then((res) => {
                 if (res.success) {
-                    dispatch(({ type: IS_SUCCESSFUL, isAuth: true}));
-                    setCookie('accessToken', res.accessToken, {expires: 20 * 60});
-                    setCookie('refreshToken', res.refreshToken);
+                    dispatch({ type: IS_SUCCESSFUL, isAuth: true });
+                    setCookie("accessToken", res.accessToken, {
+                        expires: 20 * 60,
+                    });
+                    setCookie("refreshToken", res.refreshToken);
                 } else {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch({ type: IS_FAILED });
-            })
-    }
+            });
+    };
 }
 
 export function loginning({ email, password }) {
     return function (dispatch) {
         dispatch({ type: IS_REQUESTING });
         api.login({ email, password })
-            .then(res => {
+            .then((res) => {
                 if (res.success) {
-                    dispatch(({ type: IS_SUCCESSFUL, isAuth: true}));
-                    setCookie('accessToken', res.accessToken, {expires: 20 * 60});
-                    setCookie('refreshToken', res.refreshToken);
+                    dispatch({ type: IS_SUCCESSFUL, isAuth: true });
+                    setCookie("accessToken", res.accessToken, {
+                        expires: 20 * 60,
+                    });
+                    setCookie("refreshToken", res.refreshToken);
                 } else {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch({ type: IS_FAILED });
             });
-    }
+    };
 }
 
 export function loggingOut() {
     return function (dispatch) {
         dispatch({ type: IS_REQUESTING });
-        api.logout(getCookie('refreshToken'))
-            .then(res => {
+        api.logout(getCookie("refreshToken"))
+            .then((res) => {
                 if (res.success) {
-                    dispatch(({ type: IS_SUCCESSFUL, isAuth: false }));
-                    deleteCookie('accessToken');
-                    deleteCookie('refreshToken');
+                    dispatch({ type: IS_SUCCESSFUL, isAuth: false });
+                    deleteCookie("accessToken");
+                    deleteCookie("refreshToken");
                 } else {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch({ type: IS_FAILED });
             });
-    }
+    };
 }
 
 export function forgotPassword(email, navigate) {
-    return function(dispatch) {
+    return function (dispatch) {
         dispatch({ type: IS_REQUESTING });
         api.forgotPassword(email)
-            .then(res => {
+            .then((res) => {
                 if (res.success) {
-                    navigate("/reset-password", { replace: true, state: {email: email} });
-                }
-                else {
+                    navigate("/reset-password", {
+                        replace: true,
+                        state: { email: email },
+                    });
+                } else {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch({ type: IS_FAILED });
-            })
-    }
+            });
+    };
 }
 
 export function resetPassword(password, token, navigate) {
     return function (dispatch) {
         dispatch({ type: IS_REQUESTING });
         api.resetPassword(password, token)
-            .then(res => {
+            .then((res) => {
                 if (res.success) {
-                    navigate("/login")
-                }
-                else {
-                    dispatch({ type: IS_FAILED });
-                }
-            })
-            .catch(err => {
-                dispatch({ type: IS_FAILED });
-            })
-    }
-}
-
-export function getUserInfo(formData, setFormData) {
-    return function(dispatch) {
-        dispatch({ type: IS_REQUESTING });
-
-        if (!getCookie('accessToken')) {
-            getToken();
-        }
-        api.getUserInfo(getCookie('accessToken'))
-            .then(res => {
-                if (res.success) {
-                    setFormData({...formData, ...res.user});
-                }
-                else {
-                    dispatch({ type: IS_FAILED });
-                }
-            })
-            .catch(err => {
-                dispatch({ type: IS_FAILED });
-            })
-    }
-}
-
-export function updateUserInfo(formData) {
-    return function(dispatch) {
-        dispatch({ type: IS_REQUESTING });
-
-        if (!getCookie('accessToken')) {
-            getToken();
-        }
-
-        api.updateUserInfo(getCookie('accessToken'), formData)
-            .then(res => {
-                if (res.success) {
-                    console.log('SUCCESS');
-                }
-                else {
-                    dispatch({ type: IS_FAILED });
-                }
-            })
-            .catch(err => {
-                dispatch({ type: IS_FAILED });
-            })
-    }
-}
-
-export function getToken() {
-    return function(dispatch) {
-        dispatch({ type: IS_REQUESTING });
-        api.getToken(getCookie('refreshToken'))
-            .then(res => {
-                if (res.success) {
-                    setCookie('accessToken', res.accessToken, {expires: 20 * 60});
-                    setCookie('refreshToken', res.refreshToken);
+                    navigate("/login");
                 } else {
                     dispatch({ type: IS_FAILED });
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch({ type: IS_FAILED });
+            });
+    };
+}
+
+export function getUserInfo(formData, setFormData) {
+    return function (dispatch) {
+        dispatch({ type: IS_REQUESTING });
+
+        if (!getCookie("accessToken")) {
+            getToken();
+        }
+        api.getUserInfo(getCookie("accessToken"))
+            .then((res) => {
+                if (res.success) {
+                    setFormData({ ...formData, ...res.user });
+                } else {
+                    dispatch({ type: IS_FAILED });
+                }
             })
-    }
+            .catch((err) => {
+                dispatch({ type: IS_FAILED });
+            });
+    };
+}
+
+export function updateUserInfo(formData) {
+    return function (dispatch) {
+        dispatch({ type: IS_REQUESTING });
+
+        if (!getCookie("accessToken")) {
+            getToken();
+        }
+
+        api.updateUserInfo(getCookie("accessToken"), formData)
+            .then((res) => {
+                if (res.success) {
+                    console.log("SUCCESS");
+                } else {
+                    dispatch({ type: IS_FAILED });
+                }
+            })
+            .catch((err) => {
+                dispatch({ type: IS_FAILED });
+            });
+    };
+}
+
+export function getToken() {
+    return function (dispatch) {
+        dispatch({ type: IS_REQUESTING });
+        api.getToken(getCookie("refreshToken"))
+            .then((res) => {
+                if (res.success) {
+                    setCookie("accessToken", res.accessToken, {
+                        expires: 20 * 60,
+                    });
+                    setCookie("refreshToken", res.refreshToken);
+                } else {
+                    dispatch({ type: IS_FAILED });
+                }
+            })
+            .catch((err) => {
+                dispatch({ type: IS_FAILED });
+            });
+    };
 }

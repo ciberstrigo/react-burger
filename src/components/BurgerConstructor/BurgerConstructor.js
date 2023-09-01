@@ -29,7 +29,7 @@ const BurgerConstructor = ({ showOrderDetails }) => {
         };
     }, [data]);
 
-    let total = useSelector(//x
+    let total = useSelector(
         (store) => store.burger.constructorReducer.ingredients,
     ).reduce((acc, { price }) => {
         return acc + parseInt(price);

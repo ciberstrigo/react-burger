@@ -86,7 +86,7 @@ function login({ email, password }) {
 }
 
 function logout(token) {
-    return fetchWithRefresh(`${API_URL}/auth/logout`, {
+    return fetch(`${API_URL}/auth/logout`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -119,7 +119,7 @@ function resetPassword(password, token) {
             password,
             token
         })
-    }).then(checkResponse)
+    })
 }
 
 function getUserInfo(token) {
@@ -129,7 +129,7 @@ function getUserInfo(token) {
             'Content-Type': 'application/json',
             'authorization': token
         }
-    }).then(checkResponse)
+    })
 }
 
 function updateUserInfo(token, data) {
@@ -140,7 +140,7 @@ function updateUserInfo(token, data) {
             'authorization': token
         },
         body: JSON.stringify({...data})
-    }).then(checkResponse)
+    })
 }
 
 export {

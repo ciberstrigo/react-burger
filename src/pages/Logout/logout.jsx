@@ -4,7 +4,9 @@ import {loggingOut} from "../../services/actions/user";
 import {useDispatch} from "react-redux";
 
 const Logout = () => {
-    useDispatch()(loggingOut());
+    const dispatch = useDispatch();
+
+    dispatch(loggingOut());
 
     return (
         <Navigate to={{ pathname: '/' }} />

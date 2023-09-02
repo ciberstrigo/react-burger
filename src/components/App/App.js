@@ -61,7 +61,7 @@ const App = () => {
                 <Route path="/forgot-password" exact={true} element={<ProtectedRoute onlyAuth={false}><ForgotPassword /></ProtectedRoute>} />
                 <Route path="/reset-password" exact={true} element={<ProtectedRoute onlyAuth={false}><ResetPassword /></ProtectedRoute>} />
                 <Route path="/logout" exact={true} element={<Logout />} />
-                <Route path="/profile" exact={true} element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                <Route path="/profile" exact={true} element={<ProtectedRoute onlyAuth={true}><Profile /></ProtectedRoute>} />
                 <Route path={"/ingredients/:ingredientId"} element={<IngredientDetails header="Детали ингредиента"/>}/>
             </Routes>
             {orderVisible && (

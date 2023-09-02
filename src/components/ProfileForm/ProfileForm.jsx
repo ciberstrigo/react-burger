@@ -1,17 +1,11 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getUserInfo, updateUserInfo } from '../../services/actions/user';
+import {getUserInfo, updateUserInfo} from '../../services/actions/user';
 import styles from './ProfileForm.module.css';
 
 export default function ProfileForm() {
     const dispatch = useDispatch();
-    const [formData, setFormData] = React.useState({
-        name: '',
-        email: '',
-        password: ''
-    });
-
     const onChangeFormData = e => {
         setFormData({
             ...formData,
@@ -19,25 +13,31 @@ export default function ProfileForm() {
         });
     }
 
+    const userData = useSelector(state => state.user.data);
+
+    const [formData, setFormData] = useState({
+        name: userData.name,
+        email: userData.email,
+        password: userData.password
+    });
+
+    useEffect(() => {
+        dispatch(getUserInfo());
+    }, [dispatch])
+
+    useEffect(() => {
+        setFormData({...formData, ...userData});
+    }, [userData]);
+
+    const onCancel = (e) => {
+        e.preventDefault();
+        dispatch(getUserInfo());
+    };
+
     const onSaveChanges = (e) => {
         e.preventDefault();
         dispatch(updateUserInfo(formData));
     }
-
-    useEffect(() => {
-        let mounted = true;
-
-        if(mounted) {
-            dispatch(getUserInfo(formData));
-        }
-
-        return () => {mounted = false};
-    }, [dispatch]);
-
-    const onCancel = (e) => {
-        e.preventDefault();
-        dispatch(getUserInfo(formData, setFormData));
-    };
 
     return (
         <form

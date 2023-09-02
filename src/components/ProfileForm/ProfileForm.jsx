@@ -1,43 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React from 'react';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import {getUserInfo, updateUserInfo} from '../../services/actions/user';
 import styles from './ProfileForm.module.css';
+import useFormData from "../../utils/useFormData";
 
 export default function ProfileForm() {
-    const dispatch = useDispatch();
-    const onChangeFormData = e => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    }
-
-    const userData = useSelector(state => state.user.data);
-
-    const [formData, setFormData] = useState({
-        name: userData.name,
-        email: userData.email,
-        password: userData.password
-    });
-
-    useEffect(() => {
-        dispatch(getUserInfo());
-    }, [dispatch])
-
-    useEffect(() => {
-        setFormData({...formData, ...userData});
-    }, [userData]);
-
-    const onCancel = (e) => {
-        e.preventDefault();
-        dispatch(getUserInfo());
-    };
-
-    const onSaveChanges = (e) => {
-        e.preventDefault();
-        dispatch(updateUserInfo(formData));
-    }
+    const [formData, onChangeFormData, onCancel, onSaveChanges] = useFormData()
 
     return (
         <form

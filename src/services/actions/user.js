@@ -105,17 +105,13 @@ export function resetPassword(password, token, navigate) {
     };
 }
 
-export function getUserInfo(formData, setFormData) {
+export function getUserInfo(formData) {
     return function (dispatch) {
         dispatch({ type: IS_REQUESTING });
 
-        if (!getCookie("accessToken")) {
-            getToken();
-        }
         api.getUserInfo(getCookie("accessToken"))
             .then((res) => {
                 if (res.success) {
-                    setFormData({ ...formData, ...res.user });
                     dispatch({ type: UPDATE_USER_DATA, payload: { ...formData, ...res.user } });
                 } else {
                     dispatch({ type: IS_FAILED });
@@ -131,34 +127,10 @@ export function updateUserInfo(formData) {
     return function (dispatch) {
         dispatch({ type: IS_REQUESTING });
 
-        if (!getCookie("accessToken")) {
-            getToken();
-        }
-
         api.updateUserInfo(getCookie("accessToken"), formData)
             .then((res) => {
                 if (res.success) {
                     console.log("SUCCESS");
-                } else {
-                    dispatch({ type: IS_FAILED });
-                }
-            })
-            .catch(() => {
-                dispatch({ type: IS_FAILED });
-            });
-    };
-}
-
-export function getToken() {
-    return function (dispatch) {
-        dispatch({ type: IS_REQUESTING });
-        api.getToken(getCookie("refreshToken"))
-            .then((res) => {
-                if (res.success) {
-                    setCookie("accessToken", res.accessToken, {
-                        expires: 20 * 60,
-                    });
-                    setCookie("refreshToken", res.refreshToken);
                 } else {
                     dispatch({ type: IS_FAILED });
                 }

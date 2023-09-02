@@ -28,7 +28,7 @@ export default function ProfileForm() {
         let mounted = true;
 
         if(mounted) {
-            dispatch(getUserInfo(formData, setFormData));
+            dispatch(getUserInfo(formData));
         }
 
         return () => {mounted = false};

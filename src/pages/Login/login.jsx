@@ -39,6 +39,7 @@ const Login = () => {
                         error={false}
                         errorText={'Ошибка'}
                         size={'default'}
+                        autoComplete={'email'}
                     />
                     <Input
                         type={'password'}
@@ -49,6 +50,7 @@ const Login = () => {
                         error={false}
                         errorText={'Ошибка'}
                         size={'default'}
+                        autoComplete={'current-password'}
                     />
                     <Button type="primary" size="medium" htmlType="submit">
                         Войти

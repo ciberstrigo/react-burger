@@ -55,6 +55,7 @@ const Register = () => {
                         error={false}
                         errorText={'Ошибка'}
                         size={'default'}
+                        autoComplete={'username'}
                     />
                     <Input
                         type={'email'}
@@ -65,6 +66,7 @@ const Register = () => {
                         error={false}
                         errorText={'Ошибка'}
                         size={'default'}
+                        autoComplete={'email'}
                     />
                     <Input
                         type={'password'}
@@ -75,6 +77,7 @@ const Register = () => {
                         error={false}
                         errorText={'Ошибка'}
                         size={'default'}
+                        autoComplete={'current-password'}
                     />
                     <Button type="primary" size="medium" htmlType={"submit"}>
                         Зарегистироваться

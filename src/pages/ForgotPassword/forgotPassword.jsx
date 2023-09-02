@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./forgotPassword.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, Navigate, useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {Link, useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import {forgotPassword} from "../../services/actions/user";
 
 const ForgotPassword = () => {
@@ -33,6 +33,7 @@ const ForgotPassword = () => {
                         error={false}
                         errorText={'Ошибка'}
                         size={'default'}
+                        autoComplete={'email'}
                     />
                     <Button type="primary" size="medium" htmlType="submit">
                         Восстановить

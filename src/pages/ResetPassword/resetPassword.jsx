@@ -42,6 +42,7 @@ const ResetPassword = () => {
                         error={false}
                         errorText={'Ошибка'}
                         size={'default'}
+                        autoComplete={'new-password'}
                     />
                     <Input
                         type={'text'}
@@ -52,6 +53,7 @@ const ResetPassword = () => {
                         error={false}
                         errorText={'Ошибка'}
                         size={'default'}
+                        autoComplete={'one-time-code'}
                     />
                     <Button type="primary" size="medium" htmlType="submit">
                         Сохранить

@@ -48,7 +48,7 @@ const App = () => {
         <div className={style.App__main}>
             <AppHeader />
             <Routes location={background || location}>
-                <Route path="/" exact={true}
+                <Route path="/" exact
                        element={
                             <DndProvider backend={HTML5Backend}>
                                 <HomePage toggleOrderDetails={toggleOrderDetails}
@@ -56,12 +56,12 @@ const App = () => {
                             </DndProvider>} />
 
                 <Route path="*" element={<PageNotFound />} />
-                <Route path="/login" exact={true} element={<ProtectedRoute onlyAuth={false}><Login /></ProtectedRoute>} />
-                <Route path="/register" exact={true} element={<ProtectedRoute onlyAuth={false}><Register /></ProtectedRoute>} />
-                <Route path="/forgot-password" exact={true} element={<ProtectedRoute onlyAuth={false}><ForgotPassword /></ProtectedRoute>} />
-                <Route path="/reset-password" exact={true} element={<ProtectedRoute onlyAuth={false}><ResetPassword /></ProtectedRoute>} />
-                <Route path="/logout" exact={true} element={<Logout />} />
-                <Route path="/profile" exact={true} element={<ProtectedRoute onlyAuth={true}><Profile /></ProtectedRoute>} />
+                <Route path="/login" exact element={<ProtectedRoute onlyAuth={false}><Login /></ProtectedRoute>} />
+                <Route path="/register" exact element={<ProtectedRoute onlyAuth={false}><Register /></ProtectedRoute>} />
+                <Route path="/forgot-password" exact element={<ProtectedRoute onlyAuth={false}><ForgotPassword /></ProtectedRoute>} />
+                <Route path="/reset-password" exact element={<ProtectedRoute onlyAuth={false}><ResetPassword /></ProtectedRoute>} />
+                <Route path="/logout" exact element={<Logout />} />
+                <Route path="/profile" exact element={<ProtectedRoute onlyAuth><Profile /></ProtectedRoute>} />
                 <Route path={"/ingredients/:ingredientId"} element={<IngredientDetails header="Детали ингредиента"/>}/>
             </Routes>
             {orderVisible && (

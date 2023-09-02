@@ -113,7 +113,7 @@ const BurgerConstructor = ({ showOrderDetails }) => {
                         price={burgerBun.price}
                         thumbnail={burgerBun.image}
                         extraClass={"mr-4"}
-                        isLocked={true}
+                        isLocked
                     />
                 )}
                 <div className={`${style.scrollable}`} ref={scrollableRef}>
@@ -136,7 +136,7 @@ const BurgerConstructor = ({ showOrderDetails }) => {
                         price={burgerBun.price}
                         thumbnail={burgerBun.image}
                         extraClass={"mr-4"}
-                        isLocked={true}
+                        isLocked
                     />
                 )}
                 <div className={style.makeOrderBlock}>

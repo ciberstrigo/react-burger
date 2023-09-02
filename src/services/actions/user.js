@@ -5,6 +5,7 @@ import * as api from "../../utils/api";
 export const IS_REQUESTING = "IS_REQUESTING";
 export const IS_FAILED = "IS_FAILED";
 export const IS_SUCCESSFUL = "IS_SUCCESSFUL";
+export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
 
 export function register({ email, password, name }) {
     return function (dispatch) {
@@ -115,6 +116,7 @@ export function getUserInfo(formData, setFormData) {
             .then((res) => {
                 if (res.success) {
                     setFormData({ ...formData, ...res.user });
+                    dispatch({ type: UPDATE_USER_DATA, payload: { ...formData, ...res.user } });
                 } else {
                     dispatch({ type: IS_FAILED });
                 }

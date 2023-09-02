@@ -2,22 +2,18 @@ import React from "react";
 import styles from "./login.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {loginning} from "../../services/actions/user";
+import {useDispatch, useSelector} from "react-redux";
+import {loginning, UPDATE_USER_DATA} from "../../services/actions/user";
 
 const Login = () => {
     const dispatch = useDispatch();
-
-    const [formData, setFormData] = React.useState({
-        email: '',
-        password: ''
-    });
+    const formData = useSelector(store => store.user.data);
 
     const onChangeFormData = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+        dispatch({type: UPDATE_USER_DATA, payload: {
+                ...formData,
+                [e.target.name]: e.target.value
+        }});
     }
 
     const onLogging = (e) => {

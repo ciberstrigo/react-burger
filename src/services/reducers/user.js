@@ -1,10 +1,15 @@
-import { IS_REQUESTING, IS_FAILED, IS_SUCCESSFUL } from "../actions/user";
+import {IS_REQUESTING, IS_FAILED, IS_SUCCESSFUL, UPDATE_USER_DATA} from "../actions/user";
 import { getCookie } from "../../utils/cookies";
 
 const initialState = {
     isRequesting: false,
     isFailed: false,
     isAuth: !!getCookie("accessToken"),
+    data: {
+        name: '',
+        email: '',
+        password: ''
+    }
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -29,6 +34,14 @@ export const userReducer = (state = initialState, action) => {
                 isRequesting: false,
                 isAuth: action.isAuth,
             };
+        }
+        case UPDATE_USER_DATA: {
+            return {
+                ...state,
+                data: {
+                    ...action.payload
+                }
+            }
         }
         default: {
             return state;

@@ -32,7 +32,7 @@ export default function ProfileForm() {
         }
 
         return () => {mounted = false};
-    }, [dispatch, formData]);
+    }, [dispatch]);
 
     const onCancel = (e) => {
         e.preventDefault();

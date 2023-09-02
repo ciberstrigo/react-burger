@@ -7,19 +7,12 @@ import {forgotPassword} from "../../services/actions/user";
 
 const ForgotPassword = () => {
     const dispatch = useDispatch();
-    const { isAuth } = useSelector(store => store.user);
     const navigate = useNavigate();
     const [email, setEmail] = React.useState('');
 
     const onEmailConfirm = (e) => {
         e.preventDefault();
         dispatch(forgotPassword(email, navigate));
-    }
-
-    if (isAuth) {
-        return (
-            <Navigate to={"/"}/>
-        );
     }
 
     return (

@@ -7,7 +7,7 @@ import { register } from '../../services/actions/user';
 
 const Register = () => {
     const dispatch = useDispatch();
-    const { isAuth } = useSelector(store => store.user);
+    const isAuth = useSelector(store => store.user.isAuth);
 
     const [formData, setFormData] = React.useState({
         name: '',

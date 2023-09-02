@@ -1,14 +1,12 @@
 import React from "react";
 import styles from "./login.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, Navigate, useLocation} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import {loginning} from "../../services/actions/user";
 
 const Login = () => {
     const dispatch = useDispatch();
-    const { isAuth } = useSelector(store => store.user);
-    const { state } = useLocation();
 
     const [formData, setFormData] = React.useState({
         email: '',
@@ -25,12 +23,6 @@ const Login = () => {
     const onLogging = (e) => {
         e.preventDefault();
         dispatch(loginning({ ...formData }));
-    }
-
-    if (isAuth) {
-        return (
-            <Navigate to={state?.from || "/"}/>
-        );
     }
 
     return (

@@ -17,7 +17,7 @@ import ForgotPassword from "../../pages/ForgotPassword/forgotPassword";
 import Logout from "../../pages/Logout/logout";
 import ResetPassword from "../../pages/ResetPassword/resetPassword";
 import {Profile} from "../../pages/Profile/profile";
-import ProtectedRouteElement from "../ProtectedRouteElement/ProtectedRouteElement";
+import ProtectedRoute from "../ProtectedRouteElement/ProtectedRoute";
 
 const App = () => {
     const [orderVisible, setOrderVisible] = React.useState(false);
@@ -56,12 +56,12 @@ const App = () => {
                             </DndProvider>} />
 
                 <Route path="*" element={<PageNotFound />} />
-                <Route path="/login" exact={true} element={<Login />} />
-                <Route path="/register" exact={true} element={<Register />} />
-                <Route path="/forgot-password" exact={true} element={<ForgotPassword />} />
-                <Route path="/reset-password" exact={true} element={<ResetPassword />} />
+                <Route path="/login" exact={true} element={<ProtectedRoute onlyAuth={false}><Login /></ProtectedRoute>} />
+                <Route path="/register" exact={true} element={<ProtectedRoute onlyAuth={false}><Register /></ProtectedRoute>} />
+                <Route path="/forgot-password" exact={true} element={<ProtectedRoute onlyAuth={false}><ForgotPassword /></ProtectedRoute>} />
+                <Route path="/reset-password" exact={true} element={<ProtectedRoute onlyAuth={false}><ResetPassword /></ProtectedRoute>} />
                 <Route path="/logout" exact={true} element={<Logout />} />
-                <Route path="/profile" exact={true} element={<ProtectedRouteElement><Profile /></ProtectedRouteElement>} />
+                <Route path="/profile" exact={true} element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path={"/ingredients/:ingredientId"} element={<IngredientDetails header="Детали ингредиента"/>}/>
             </Routes>
             {orderVisible && (

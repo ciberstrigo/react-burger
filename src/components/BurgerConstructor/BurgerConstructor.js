@@ -22,7 +22,7 @@ import {useNavigate} from "react-router-dom";
 const BurgerConstructor = ({ showOrderDetails }) => {
     const scrollableRef = React.useRef();
     const data = useSelector((store) => store.burger.constructorReducer.ingredients);
-    const { isAuth } = useSelector(store => store.user);
+    const isAuth = useSelector(store => store.user.isAuth);
     const navigate = useNavigate();
 
     const { burgerBun, ingredients } = useMemo(() => {

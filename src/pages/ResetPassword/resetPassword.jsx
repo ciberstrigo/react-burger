@@ -7,7 +7,7 @@ import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components"
 
 const ResetPassword = () => {
     const dispatch = useDispatch();
-    const { isAuth } = useSelector(store => store.user);
+    const isAuth= useSelector(store => store.user.isAuth);
     const navigate = useNavigate();
     const location = useLocation();
     const [token, setToken] = React.useState('');

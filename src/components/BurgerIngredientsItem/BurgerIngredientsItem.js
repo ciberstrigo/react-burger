@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
 
 const BurgerIngredientsItems = ({ data, onClick }) => {
-    const ingredients = useSelector(//x
+    const ingredients = useSelector(
         (store) => store.burger.constructorReducer.ingredients,
     ).filter((item) => {
         return item && item._id === data._id;

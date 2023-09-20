@@ -17,10 +17,13 @@ import {
 } from "../../services/actions/constructor";
 import { applyOrder } from "../../services/actions/applyOrder";
 import { useDrop } from "react-dnd";
+import {useNavigate} from "react-router-dom";
 
 const BurgerConstructor = ({ showOrderDetails }) => {
     const scrollableRef = React.useRef();
     const data = useSelector((store) => store.burger.constructorReducer.ingredients);
+    const isAuth = useSelector(store => store.user.isAuth);
+    const navigate = useNavigate();
 
     const { burgerBun, ingredients } = useMemo(() => {
         return {
@@ -29,7 +32,7 @@ const BurgerConstructor = ({ showOrderDetails }) => {
         };
     }, [data]);
 
-    let total = useSelector(//x
+    let total = useSelector(
         (store) => store.burger.constructorReducer.ingredients,
     ).reduce((acc, { price }) => {
         return acc + parseInt(price);
@@ -77,6 +80,22 @@ const BurgerConstructor = ({ showOrderDetails }) => {
         },
     });
 
+    const makeOrder = () => {
+        if (!isAuth) {
+            return navigate('/login');
+        }
+        if (burgerBun) {
+            dispatch(
+                applyOrder([
+                    burgerBun._id,
+                    ...ingredients.map((item) => item._id),
+                    burgerBun._id,
+                ]),
+            );
+            showOrderDetails();
+        }
+    }
+
     return (
         <section className={style.burgerConstructor}>
             <div className={style.burgerConstructor__list} ref={dropTarget}>
@@ -94,7 +113,7 @@ const BurgerConstructor = ({ showOrderDetails }) => {
                         price={burgerBun.price}
                         thumbnail={burgerBun.image}
                         extraClass={"mr-4"}
-                        isLocked={true}
+                        isLocked
                     />
                 )}
                 <div className={`${style.scrollable}`} ref={scrollableRef}>
@@ -117,7 +136,7 @@ const BurgerConstructor = ({ showOrderDetails }) => {
                         price={burgerBun.price}
                         thumbnail={burgerBun.image}
                         extraClass={"mr-4"}
-                        isLocked={true}
+                        isLocked
                     />
                 )}
                 <div className={style.makeOrderBlock}>
@@ -131,18 +150,7 @@ const BurgerConstructor = ({ showOrderDetails }) => {
                         htmlType="button"
                         type="primary"
                         size="large"
-                        onClick={() => {
-                            if (burgerBun) {
-                                dispatch(
-                                    applyOrder([
-                                        burgerBun._id,
-                                        ...ingredients.map((item) => item._id),
-                                        burgerBun._id,
-                                    ]),
-                                );
-                                showOrderDetails();
-                            }
-                        }}
+                        onClick={makeOrder}
                     >
                         Оформить заказ
                     </Button>

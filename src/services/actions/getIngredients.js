@@ -1,5 +1,5 @@
 // Получение списка ингредиентов от API. Используется в компоненте BurgerConstructor.
-import { recieveIngredients } from "../../utils/api";
+import { receiveIngredients } from "../../utils/api";
 
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
@@ -10,7 +10,7 @@ export const getIngredients = () => {
         dispatch({
             type: GET_INGREDIENTS_REQUEST,
         });
-        recieveIngredients()
+        receiveIngredients()
             .then(({ data }) => {
                 dispatch({
                     type: GET_INGREDIENTS_SUCCESS,

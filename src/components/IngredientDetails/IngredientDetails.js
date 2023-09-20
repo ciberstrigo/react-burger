@@ -1,8 +1,15 @@
 import React from "react";
 import style from "./IngredientDetails.module.css";
-import types from "../../utils/types";
+import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import PropTypes from "prop-types";
 
-const IngredientDetails = ({ ingredient }) => {
+const IngredientDetails = () => {
+    const { ingredientId } = useParams();
+    const ingredients = useSelector(store => {
+        return store.burger.ingredientsReducer.ingredients;
+    });
+    const ingredient = ingredients.find(ingredient => ingredient._id === ingredientId);
     const nutrients = [
         {
             id: "calories",
@@ -22,7 +29,7 @@ const IngredientDetails = ({ ingredient }) => {
         },
     ];
 
-    return (
+    return ingredient && (
         <div className={style.IngredientDetails__container}>
             <img src={ingredient.image_large} alt={ingredient.name} />
             <p className={"pt-4 text text_type_main-medium"}>
@@ -47,7 +54,7 @@ const IngredientDetails = ({ ingredient }) => {
 };
 
 IngredientDetails.propTypes = {
-    ingredient: types.ingredient,
+    modal: PropTypes.bool,
 };
 
 export default IngredientDetails;

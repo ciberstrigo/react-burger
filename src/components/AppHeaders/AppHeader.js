@@ -6,44 +6,50 @@ import {
     ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./AppHeader.module.css";
+import {NavLink} from "react-router-dom";
 
 const AppHeader = () => {
+    const navLinkClassName = ({ isActive }) => {
+        return `${style.AppHeaders__navLink} 
+        ${isActive ? style.AppHeaders__navLink_active : style.AppHeaders__navLink_inactive}`;
+    };
+
     return (
         <header className={`p-4 ${style.AppHeaders}`}>
             <nav className={style.AppHeaders__leftNavigation}>
-                <a
-                    href={"/constructor"}
-                    className={`${style.AppHeaders__navLink} ${style.AppHeaders__navLink_active}`}
+                <NavLink
+                    to={"/"}
+                    className={navLinkClassName}
                 >
                     <span className={style.AppHeaders__navLink__icon}>
-                        <BurgerIcon type="primary" />
+                        <BurgerIcon type="secondary" />
                     </span>
                     Конструктор
-                </a>
-                <a
-                    href={"/constructor"}
-                    className={`${style.AppHeaders__navLink} ${style.AppHeaders__navLink_inactive}`}
+                </NavLink>
+                <NavLink
+                    to={"/constructor"}
+                    className={navLinkClassName}
                 >
                     <span className={style.AppHeaders__navLink__icon}>
                         <ListIcon type="secondary" />
                     </span>
                     Лента заказов
-                </a>
+                </NavLink>
             </nav>
 
             <div className={style.AppHeaders__Logo}>
                 <Logo />
             </div>
 
-            <a
-                href={"/lk"}
-                className={`${style.AppHeaders__navLink} ${style.AppHeaders__navLink_inactive}`}
+            <NavLink
+                to={"/profile"}
+                className={navLinkClassName}
             >
                 <span className={style.AppHeaders__navLink__icon}>
                     <ProfileIcon type="secondary" />
                 </span>
                 Личный кабинет
-            </a>
+            </NavLink>
         </header>
     );
 };

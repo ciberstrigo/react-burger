@@ -1,5 +1,6 @@
 // Получение и обновление номера заказа в модальном окне OrderDetails.
-import { recieveOrderNumber } from "../../utils/api";
+import { receiveOrderNumber } from "../../utils/api";
+import {getCookie} from "../../utils/cookies";
 
 export const GET_ORDER_NUMBER_REQUEST = "GET_ORDER_NUMBER_REQUEST";
 export const GET_ORDER_NUMBER_SUCCESS = "GET_ORDER_NUMBER_SUCCESS";
@@ -11,7 +12,7 @@ export function applyOrder(ingredients) {
             type: GET_ORDER_NUMBER_REQUEST,
         });
 
-        recieveOrderNumber(ingredients)
+        receiveOrderNumber(getCookie("refreshToken"), ingredients)
             .then((data) => {
                 dispatch({
                     type: GET_ORDER_NUMBER_SUCCESS,

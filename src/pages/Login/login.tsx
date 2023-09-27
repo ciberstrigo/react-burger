@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, {ChangeEvent, FC, FormEvent, useState} from "react";
 import styles from "./login.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link} from "react-router-dom";
@@ -9,13 +9,12 @@ const Login: FC = () => {
     const dispatch = useAppDispatch();
     const [formData, setFormData] = useState({email: '', password: ''});
 
-    const onChangeFormData = (e: React.SyntheticEvent) => {
+    const onChangeFormData = (e: ChangeEvent<HTMLInputElement>) => {
         const target = e.target as HTMLInputElement;
         setFormData({...formData, [target.name]: target.value})
     }
 
-    const onLogging = (e: React.SyntheticEvent) => {
-        e.preventDefault();
+    const onLogging = (e: FormEvent<HTMLFormElement>) => {
         dispatch(loginning({ ...formData }));
     }
 

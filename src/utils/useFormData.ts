@@ -2,7 +2,6 @@ import {useAppSelector} from "./hooks";
 import React, {useEffect, useState} from "react";
 import {getUserInfo, updateUserInfo} from "../services/actions/user";
 import {useAppDispatch} from "./hooks";
-import {RootState} from "./store";
 
 export default function useFormData(): [
     formData: {name: string, email: string, password: string},
@@ -10,7 +9,7 @@ export default function useFormData(): [
     onCancel: (e: React.SyntheticEvent) => void,
     onSaveChanges: (e: React.FormEvent) => void
 ] {
-    const userData = useAppSelector((state: RootState) => state.user.data);
+    const userData = useAppSelector(state => state.user.data);
     const dispatch = useAppDispatch();
 
     const onChangeFormData = (e: React.SyntheticEvent) => {

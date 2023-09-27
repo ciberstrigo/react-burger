@@ -4,12 +4,11 @@ import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components"
 import {Link, Navigate} from "react-router-dom";
 import {useAppSelector} from "../../utils/hooks";
 import { register } from '../../services/actions/user';
-import {RootState} from "../../utils/store";
 import {useAppDispatch} from "../../utils/hooks";
 
 const Register: FC = () => {
     const dispatch = useAppDispatch();
-    const isAuth = useAppSelector((store: RootState) => store.user.isAuth);
+    const isAuth = useAppSelector(store => store.user.isAuth);
 
     const [formData, setFormData] = React.useState({
         name: '',

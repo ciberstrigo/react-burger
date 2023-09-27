@@ -7,7 +7,6 @@ import {
 import {TIngredient} from "../../utils/types";
 import {useAppSelector} from "../../utils/hooks";
 import { useDrag } from "react-dnd";
-import {RootState} from "../../utils/store";
 
 interface IBurgerIngredientItems {
     ingredient: TIngredient,
@@ -16,7 +15,7 @@ interface IBurgerIngredientItems {
 
 const BurgerIngredientsItems: FC<IBurgerIngredientItems> = ({ ingredient, onClick }) => {
     const ingredients = useAppSelector(
-        (store: RootState) => store.burger.constructorReducer.ingredients,
+        store => store.burger.constructorReducer.ingredients,
     ).filter((item: TIngredient) => {
         return item && item._id === ingredient._id;
     });

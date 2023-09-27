@@ -3,10 +3,9 @@ import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import icon from "../../images/icon.svg";
 import style from "./OrderDetails.module.css";
 import {useAppSelector} from "../../utils/hooks";
-import {RootState} from "../../utils/store";
 
 const OrderDetails: FC = () => {
-    const orderNumber = useAppSelector((store: RootState) => store.burger.orderReducer.order.orderNumber);
+    const orderNumber = useAppSelector(store => store.burger.orderReducer.order.orderNumber);
 
     return (
         <div className={style.OrderDetails__content}>

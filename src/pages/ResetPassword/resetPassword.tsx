@@ -5,11 +5,10 @@ import {Link, Navigate, useLocation, useNavigate} from "react-router-dom";
 import {resetPassword} from "../../services/actions/user";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useAppDispatch} from "../../utils/hooks";
-import {RootState} from "../../utils/store";
 
 const ResetPassword: FC = () => {
     const dispatch = useAppDispatch();
-    const isAuth= useAppSelector((store: RootState) => store.user.isAuth);
+    const isAuth= useAppSelector(store => store.user.isAuth);
     const navigate = useNavigate();
     const location = useLocation();
     const [token, setToken] = React.useState('');

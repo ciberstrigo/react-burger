@@ -4,7 +4,6 @@ import BurgerIngredientsItem from "../BurgerIngredientsItem/BurgerIngredientsIte
 import style from "./BurgerIngridients.module.css";
 import {useAppSelector} from "../../utils/hooks";
 import {TIngredient} from "../../utils/types";
-import {RootState} from "../../utils/store";
 
 interface IBurgerIngredients {
     showDetails: (ingredient: TIngredient) => void
@@ -36,7 +35,7 @@ const BurgerIngredients: FC<IBurgerIngredients> = ({ showDetails }) => {
     };
 
     const ingredients: Array<TIngredient> =
-        useAppSelector((store: RootState) => store.burger.ingredientsReducer.ingredients);
+        useAppSelector(store => store.burger.ingredientsReducer.ingredients);
 
     const handleScroll = () => {
         const scrollContainerPosition =

@@ -1,6 +1,5 @@
 import React, {FC, ReactElement} from "react";
 import {Navigate, useLocation} from 'react-router-dom';
-import {RootState} from "../../utils/store";
 import {useAppSelector} from "../../utils/hooks";
 
 interface IProtectedRoute {
@@ -9,7 +8,7 @@ interface IProtectedRoute {
 }
 
 const ProtectedRoute: FC<IProtectedRoute>  = ({children, onlyAuth = true}) => {
-    const isAuth = useAppSelector((store: RootState) => store.user.isAuth);
+    const isAuth = useAppSelector(store => store.user.isAuth);
     const { state } = useLocation();
 
     if (onlyAuth && !isAuth) {

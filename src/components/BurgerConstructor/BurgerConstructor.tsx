@@ -18,7 +18,6 @@ import { applyOrder } from "../../services/actions/applyOrder";
 import { useDrop } from "react-dnd";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../utils/hooks";
-import {RootState} from "../../utils/store";
 
 interface IBurgerConstructor {
     showOrderDetails: () => void
@@ -26,8 +25,8 @@ interface IBurgerConstructor {
 
 const BurgerConstructor: FC<IBurgerConstructor> = ({ showOrderDetails }) => {
     const scrollableRef = React.useRef() as MutableRefObject<HTMLDivElement>;
-    const data = useAppSelector((store: RootState) => store.burger.constructorReducer.ingredients);
-    const isAuth = useAppSelector((store: RootState) => store.user.isAuth);
+    const data = useAppSelector(store => store.burger.constructorReducer.ingredients);
+    const isAuth = useAppSelector(store => store.user.isAuth);
     const navigate = useNavigate();
 
     const { burgerBun, ingredients } = useMemo(() => {
@@ -38,7 +37,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ showOrderDetails }) => {
     }, [data]);
 
     const total = useAppSelector(
-        (store: RootState) => store.burger.constructorReducer.ingredients,
+        store => store.burger.constructorReducer.ingredients,
     ).reduce((acc: number, { price }: TIngredient) => {
         return acc + parseInt(String(price));
     }, 0);

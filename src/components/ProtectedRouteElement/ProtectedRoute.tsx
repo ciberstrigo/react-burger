@@ -13,7 +13,7 @@ const ProtectedRoute: FC<IProtectedRoute>  = ({children, onlyAuth = true}) => {
     const { state } = useLocation();
 
     if (onlyAuth && !isAuth) {
-        return <Navigate to={"/login"} replace/>
+        return <Navigate to={"/login"} state={{ from: location}}/>
     }
 
     if (!onlyAuth && isAuth) {

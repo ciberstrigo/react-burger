@@ -18,6 +18,7 @@ import { applyOrder } from "../../services/actions/applyOrder";
 import { useDrop } from "react-dnd";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../utils/hooks";
+import { v4 as uuidv4 } from 'uuid';
 
 interface IBurgerConstructor {
     showOrderDetails: () => void
@@ -72,13 +73,13 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ showOrderDetails }) => {
                     }
                     dispatch({
                         type: ADD_INGREDIENT_TO_CONSTRUCTOR,
-                        draggedIngredient: item,
+                        draggedIngredient: {...item, uniqueId: uuidv4()},
                     });
                 }
             } else {
                 dispatch({
                     type: ADD_INGREDIENT_TO_CONSTRUCTOR,
-                    draggedIngredient: item,
+                    draggedIngredient: {...item, uniqueId: uuidv4()},
                 });
             }
         },
@@ -127,7 +128,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ showOrderDetails }) => {
                                 e.type !== "bun" && (
                                     <BurgerConstructorItem
                                         item={e}
-                                        key={index}
+                                        key={e.uniqueId}
                                         index={index}
                                     />
                                 ),

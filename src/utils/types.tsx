@@ -31,6 +31,7 @@ export type TIngredient = {
     readonly proteins: number,
     readonly type: string,
     index: number;
+    readonly uniqueId?: string
 };
 
 export type TOrder = {

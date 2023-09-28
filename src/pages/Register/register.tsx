@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {ChangeEvent, FC, FormEvent} from "react";
 import styles from "./register.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Navigate} from "react-router-dom";
@@ -16,7 +16,7 @@ const Register: FC = () => {
         password: ''
     });
 
-    const onChangeFormData = (e: React.SyntheticEvent) => {
+    const onChangeFormData = (e: ChangeEvent<HTMLInputElement>) => {
         const target = e.target as HTMLInputElement;
         setFormData({
             ...formData,
@@ -24,7 +24,7 @@ const Register: FC = () => {
         });
     }
 
-    const onRegistration = (e: React.SyntheticEvent) => {
+    const onRegistration = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(register({ ...formData }));
     }

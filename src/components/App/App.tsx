@@ -57,12 +57,12 @@ const App = () => {
                             </DndProvider>} />
 
                 <Route path="*" element={<PageNotFound />} />
-                <Route path="/login" element={<ProtectedRoute onlyAuth={false}><Login /></ProtectedRoute>} />
-                <Route path="/register" element={<ProtectedRoute onlyAuth={false}><Register /></ProtectedRoute>} />
-                <Route path="/forgot-password" element={<ProtectedRoute onlyAuth={false}><ForgotPassword /></ProtectedRoute>} />
-                <Route path="/reset-password" element={<ProtectedRoute onlyAuth={false}><ResetPassword /></ProtectedRoute>} />
+                <Route path="/login" element={<ProtectedRoute anonymous={true}><Login /></ProtectedRoute>} />
+                <Route path="/register" element={<ProtectedRoute anonymous={true}><Register /></ProtectedRoute>} />
+                <Route path="/forgot-password" element={<ProtectedRoute anonymous={true}><ForgotPassword /></ProtectedRoute>} />
+                <Route path="/reset-password" element={<ProtectedRoute anonymous={true}><ResetPassword /></ProtectedRoute>} />
                 <Route path="/logout" element={<Logout />} />
-                <Route path="/profile" element={<ProtectedRoute onlyAuth><Profile /></ProtectedRoute>} />
+                <Route path="/profile" element={<ProtectedRoute anonymous={false}><Profile /></ProtectedRoute>} />
                 <Route path={"/ingredients/:ingredientId"} element={<IngredientDetails/>}/> // header="Детали ингредиента"
             </Routes>
             {orderVisible && (

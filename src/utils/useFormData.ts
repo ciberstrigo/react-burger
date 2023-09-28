@@ -1,18 +1,18 @@
 import {useAppSelector} from "./hooks";
-import React, {useEffect, useState} from "react";
+import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {getUserInfo, updateUserInfo} from "../services/actions/user";
 import {useAppDispatch} from "./hooks";
 
 export default function useFormData(): [
     formData: {name: string, email: string, password: string},
-    onChangeFormData: (e: React.SyntheticEvent) => void,
+    onChangeFormData: (e: ChangeEvent<HTMLInputElement>) => void,
     onCancel: (e: React.SyntheticEvent) => void,
-    onSaveChanges: (e: React.FormEvent) => void
+    onSaveChanges: (e: FormEvent<HTMLFormElement>) => void
 ] {
     const userData = useAppSelector(state => state.user.data);
     const dispatch = useAppDispatch();
 
-    const onChangeFormData = (e: React.SyntheticEvent) => {
+    const onChangeFormData = (e: ChangeEvent<HTMLInputElement>) => {
         const target = e.target as HTMLInputElement;
         setFormData({
             ...formData,
@@ -39,7 +39,7 @@ export default function useFormData(): [
         dispatch(getUserInfo());
     };
 
-    const onSaveChanges = (e: React.SyntheticEvent) => {
+    const onSaveChanges = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(updateUserInfo(formData));
     }

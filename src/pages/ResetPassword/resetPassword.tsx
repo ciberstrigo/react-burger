@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, FormEvent} from "react";
 import styles from "./resetPassword.module.css"
 import {useAppSelector} from "../../utils/hooks";
 import {Link, Navigate, useLocation, useNavigate} from "react-router-dom";
@@ -14,7 +14,7 @@ const ResetPassword: FC = () => {
     const [token, setToken] = React.useState('');
     const [password, setPassword] = React.useState('');
 
-    const onChangePassword = (e: React.SyntheticEvent) => {
+    const onChangePassword = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(resetPassword(password, token, navigate));
     }

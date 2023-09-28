@@ -4,21 +4,27 @@ import {useAppSelector} from "../../utils/hooks";
 
 interface IProtectedRoute {
     children: ReactElement;
-    onlyAuth: boolean;
+    anonymous: boolean;
 }
 
-const ProtectedRoute: FC<IProtectedRoute>  = ({children, onlyAuth = true}) => {
-    const isAuth = useAppSelector(store => store.user.isAuth);
-    const { state } = useLocation();
+const ProtectedRoute: FC<IProtectedRoute>  = ({ children, anonymous = false }) => {
+    const isLoggedIn = useAppSelector(store => store.user.isLoggedIn);
 
-    if (onlyAuth && !isAuth) {
-        return <Navigate to={"/login"} state={{ from: location}}/>
+    const location = useLocation();
+    const from = location.state?.from || '/';
+    // Если разрешен неавторизованный доступ, а пользователь авторизован...
+    if (anonymous && isLoggedIn) {
+        // ...то отправляем его на предыдущую страницу
+        return <Navigate to={ from } />;
     }
 
-    if (!onlyAuth && isAuth) {
-        return <Navigate to={state?.from || "/"} replace/>
+    // Если требуется авторизация, а пользователь не авторизован...
+    if (!anonymous && !isLoggedIn) {
+        // ...то отправляем его на страницу логин
+        return <Navigate to="/login" state={{ from: location}}/>;
     }
 
+    // Если все ок, то рендерим внутреннее содержимое
     return children;
 }
 

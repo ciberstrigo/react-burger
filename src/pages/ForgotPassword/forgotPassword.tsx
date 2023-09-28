@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FormEvent} from "react";
 import styles from "./forgotPassword.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useNavigate} from "react-router-dom";
@@ -11,7 +11,7 @@ const ForgotPassword: FC = () => {
     const navigate = useNavigate();
     const [email, setEmail] = React.useState('');
 
-    const onEmailConfirm = (e: React.SyntheticEvent) => {
+    const onEmailConfirm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(forgotPassword(email, navigate));
     }

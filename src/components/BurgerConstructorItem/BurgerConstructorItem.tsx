@@ -39,6 +39,9 @@ const BurgerConstructorItem: FC<IBurgerConstrictorItem> = ({ item, index }) => {
             const dragIndex = item.index;
             const hoverIndex = index;
 
+            console.log("dragIndex: "+dragIndex );
+            console.log("hoverIndex: "+hoverIndex );
+
             if (dragIndex === hoverIndex) {
                 return;
             }

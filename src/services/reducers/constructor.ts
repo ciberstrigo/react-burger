@@ -33,12 +33,14 @@ export const constructorReducer = (
             };
         }
         case REPLACE_INGREDIENTS: {
-            const replacedConstructorIngredients = [...state.ingredients];
-            const draggedIngredient =
-                replacedConstructorIngredients[action.payload.dragIndex];
+            const ingredientsWithoutBuns = [...state.ingredients];
+            const ingredientsBuns = ingredientsWithoutBuns.splice(0, 2);
 
-            replacedConstructorIngredients.splice(action.payload.dragIndex, 1);
-            replacedConstructorIngredients.splice(
+            const draggedIngredient =
+                ingredientsWithoutBuns[action.payload.dragIndex];
+
+            ingredientsWithoutBuns.splice(action.payload.dragIndex, 1);
+            ingredientsWithoutBuns.splice(
                 action.payload.hoverIndex,
                 0,
                 draggedIngredient,
@@ -46,7 +48,7 @@ export const constructorReducer = (
 
             return {
                 ...state,
-                ingredients: replacedConstructorIngredients,
+                ingredients: [...ingredientsBuns, ...ingredientsWithoutBuns],
             };
         }
         default: {

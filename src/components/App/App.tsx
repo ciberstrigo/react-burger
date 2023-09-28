@@ -63,7 +63,7 @@ const App = () => {
                 <Route path="/reset-password" element={<ProtectedRoute anonymous={true}><ResetPassword /></ProtectedRoute>} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/profile" element={<ProtectedRoute anonymous={false}><Profile /></ProtectedRoute>} />
-                <Route path={"/ingredients/:ingredientId"} element={<IngredientDetails/>}/> // header="Детали ингредиента"
+                <Route path={"/ingredients/:ingredientId"} element={<IngredientDetails/>}/>
             </Routes>
             {orderVisible && (
                 <Modal onClose={toggleOrderDetails}>

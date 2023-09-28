@@ -8,18 +8,18 @@ interface IProtectedRoute {
 }
 
 const ProtectedRoute: FC<IProtectedRoute>  = ({ children, anonymous = false }) => {
-    const isLoggedIn = useAppSelector(store => store.user.isLoggedIn);
+    const isAuth = useAppSelector(store => store.user.isAuth);
 
     const location = useLocation();
     const from = location.state?.from || '/';
     // Если разрешен неавторизованный доступ, а пользователь авторизован...
-    if (anonymous && isLoggedIn) {
+    if (anonymous && isAuth) {
         // ...то отправляем его на предыдущую страницу
         return <Navigate to={ from } />;
     }
 
     // Если требуется авторизация, а пользователь не авторизован...
-    if (!anonymous && !isLoggedIn) {
+    if (!anonymous && !isAuth) {
         // ...то отправляем его на страницу логин
         return <Navigate to="/login" state={{ from: location}}/>;
     }

@@ -15,6 +15,7 @@ const Login: FC = () => {
     }
 
     const onLogging = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         dispatch(loginning({ ...formData }));
     }
 

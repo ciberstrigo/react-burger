@@ -15,8 +15,8 @@ import {
     GET_ORDER_NUMBER_SUCCESS
 } from "../services/actions/applyOrder";
 import {IS_FAILED, IS_REQUESTING, IS_SUCCESSFUL, UPDATE_USER_DATA} from "../services/actions/user";
-import {RootState} from "./store";
-import {Action} from "redux";
+import {RootState, store} from "./store";
+import {Action, ActionCreator, Dispatch} from "redux";
 
 export type TIngredient = {
     readonly _id: string,
@@ -138,5 +138,6 @@ export type TActionsTypes =
     TConstructorActions;
 
 
-export type AppThunk<ReturnType = void> =
-    ThunkAction<ReturnType, RootState, unknown, Action<string>>;
+export type AppThunk<ReturnType = void> = ActionCreator<
+    ThunkAction<ReturnType, Action, RootState, TActionsTypes>
+    >;

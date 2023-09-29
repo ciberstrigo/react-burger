@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.5",
+    "@redux-devtools/extension": "^3.2.5",
+    "@reduxjs/toolkit": "https://pkg.csb.dev/reduxjs/redux-toolkit/commit/933aa4a1/@reduxjs/toolkit",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -11,6 +12,7 @@
     "@types/node": "^16.18.39",
     "@types/react": "^18.2.16",
     "@types/react-dom": "^18.2.7",
+    "@types/react-redux": "^7.1.26",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.14.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -23,6 +25,7 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "typescript": "^4.9.5",
+    "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -52,6 +55,8 @@
     ]
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.4",
+    "@typescript-eslint/parser": "^6.7.2",
     "eslint-plugin-react": "^7.33.0"
   }
 }

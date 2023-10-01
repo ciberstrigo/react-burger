@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.ingredientList {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

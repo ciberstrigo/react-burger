@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import AppHeader from "../AppHeaders/AppHeader";
 import style from "./App.module.css";
 import Modal from "../Modal/Modal";
@@ -19,13 +19,16 @@ import {Profile} from "../../pages/Profile/profile";
 import ProtectedRoute from "../ProtectedRouteElement/ProtectedRoute";
 import {TIngredient} from "../../utils/types";
 import {useAppDispatch} from "../../utils/hooks";
+import Feed from "../../pages/Feed/feed";
+import Order from "../../pages/Order/Order";
+import {WS_FEED_CONNECTION_CLOSED, WS_FEED_CONNECTION_START} from "../../services/actions/webSocketActionTypes";
 
 const App = () => {
     const [orderVisible, setOrderVisible] = React.useState(false);
     const dispatch = useAppDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const background = location.state && location.state.background;
+    const background = location.state?.background;
 
     const toggleOrderDetails = () => {
         setOrderVisible(!orderVisible);
@@ -43,6 +46,14 @@ const App = () => {
 
     React.useEffect(() => {
         dispatch(getIngredients());
+    }, [dispatch]);
+
+    React.useEffect(() => {
+        dispatch({ type: WS_FEED_CONNECTION_START });
+
+        return () => {
+            dispatch({type: WS_FEED_CONNECTION_CLOSED})
+        }
     }, [dispatch]);
 
     return (
@@ -64,6 +75,8 @@ const App = () => {
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/profile" element={<ProtectedRoute anonymous={false}><Profile /></ProtectedRoute>} />
                 <Route path={"/ingredients/:ingredientId"} element={<IngredientDetails/>}/>
+                <Route path={"/feed"} element={<Feed />}/>
+                <Route path={"/feed/:id"} element={<Order />}/>
             </Routes>
             {orderVisible && (
                 <Modal onClose={toggleOrderDetails}>
@@ -80,6 +93,18 @@ const App = () => {
                                 onClose={modalClose}
                             >
                                 <IngredientDetails/>
+                            </Modal>
+                        }
+                    />
+                </Routes>
+            )}
+            {background && (
+                <Routes>
+                    <Route
+                        path="/feed/:id"
+                        element={
+                            <Modal onClose={modalClose}>
+                                <Order />
                             </Modal>
                         }
                     />

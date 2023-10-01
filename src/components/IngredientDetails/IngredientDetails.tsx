@@ -4,13 +4,18 @@ import {useParams} from "react-router-dom";
 import {useAppSelector} from "../../utils/hooks";
 import {TIngredient} from "../../utils/types";
 
+interface INutrient {
+    id: string,
+    name: string
+}
+
 const IngredientDetails: FC = () => {
     const { ingredientId } = useParams();
     const ingredients = useAppSelector(store => {
         return store.burger.ingredientsReducer.ingredients;
     });
     const ingredient: TIngredient = ingredients.find((ingredient: TIngredient) => ingredient._id === ingredientId);
-    const nutrients = [
+    const nutrients: Array<INutrient> = [
         {
             id: "calories",
             name: "Калории, ккал",

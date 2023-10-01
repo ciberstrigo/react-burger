@@ -1,0 +1,39 @@
+.wrapper {
+    width: 640px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: auto;
+}
+
+.number {
+    align-self: center;
+}
+
+.status {
+    color: #00cccc;
+}
+
+.ingredientsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-sizing: border-box;
+    height: 322px;
+    overflow-y: auto;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.totalPrice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+}

@@ -17,6 +17,17 @@ import {
 import {IS_FAILED, IS_REQUESTING, IS_SUCCESSFUL, UPDATE_USER_DATA} from "../services/actions/user";
 import {RootState, store} from "./store";
 import {Action, ActionCreator, Dispatch} from "redux";
+import {
+    WS_FEED_CONNECTION_CLOSED,
+    WS_FEED_CONNECTION_ERROR,
+    WS_FEED_CONNECTION_START,
+    WS_FEED_CONNECTION_SUCCESS,
+    WS_FEED_GET_MESSAGE,
+    WS_FEED_SEND_MESSAGE,
+    WS_ORDERS_CONNECTION_CLOSED, WS_ORDERS_CONNECTION_ERROR,
+    WS_ORDERS_CONNECTION_START, WS_ORDERS_CONNECTION_SUCCESS, WS_ORDERS_GET_MESSAGE,
+    WS_ORDERS_SEND_MESSAGE
+} from "../services/actions/webSocketActionTypes";
 
 export type TIngredient = {
     readonly _id: string,
@@ -34,13 +45,22 @@ export type TIngredient = {
     readonly uniqueId?: string
 };
 
-export type TOrder = {
+export type TMakeOrderResponse = {
     name: string,
-    order: {
-        number: number,
-    },
+    order: TOrder,
     success: boolean,
-}
+};
+
+export type TOrder = {
+    createdAt: string;
+    ingredients: Array<string>;
+    name: string;
+    number: number;
+    status: string;
+    updatedAt: string;
+    _id: string;
+};
+
 
 export type TBurger = {
     bun: TIngredient,
@@ -141,3 +161,96 @@ export type TActionsTypes =
 export type AppThunk<ReturnType = void> = ActionCreator<
     ThunkAction<ReturnType, Action, RootState, TActionsTypes>
     >;
+
+// WebSocket feed
+
+export type TFeed = {
+    createdAt: string;
+    ingredients: Array<string>;
+    name: string;
+    number: number;
+    status: string;
+    updatedAt: string;
+    _id: string;
+}
+
+export type TFeedResponse = {
+    success: boolean;
+    total: number;
+    totalToday: number;
+    orders: Array<TFeed>;
+}
+
+export interface IWSFeedConnectionStart {
+    readonly type: typeof WS_FEED_CONNECTION_START
+}
+
+export interface IWSFeedConnectionSuccess {
+    readonly type: typeof WS_FEED_CONNECTION_SUCCESS
+}
+
+export interface IWSFeedConnectionError {
+    readonly type: typeof WS_FEED_CONNECTION_ERROR
+    payload: MessageEvent
+}
+
+export interface IWSFeedConnectionClosed {
+    readonly type: typeof WS_FEED_CONNECTION_CLOSED
+}
+
+export interface IWSFeedGetMessage {
+    readonly type: typeof WS_FEED_GET_MESSAGE
+    payload: TFeedResponse
+}
+
+export interface IWSFeedSendMessage {
+    readonly type: typeof WS_FEED_SEND_MESSAGE
+    payload: TMakeOrderResponse
+}
+
+export type TWSFeedActions =
+    IWSFeedConnectionStart |
+    IWSFeedConnectionSuccess |
+    IWSFeedConnectionError |
+    IWSFeedConnectionClosed |
+    IWSFeedGetMessage |
+    IWSFeedSendMessage
+
+
+
+
+
+export interface IWSOrderConnectionStart {
+    readonly type: typeof WS_ORDERS_CONNECTION_START
+}
+
+export interface IWSOrderConnectionSuccess {
+    readonly type: typeof WS_ORDERS_CONNECTION_SUCCESS
+}
+
+export interface IWSOrderConnectionError {
+    readonly type: typeof WS_ORDERS_CONNECTION_ERROR
+    payload: MessageEvent
+}
+
+export interface IWSOrderConnectionClosed {
+    readonly type: typeof WS_ORDERS_CONNECTION_CLOSED
+}
+
+export interface IWSOrderGetMessage {
+    readonly type: typeof WS_ORDERS_GET_MESSAGE
+    payload: TFeedResponse
+}
+
+export interface IWSOrderSendMessage {
+    readonly type: typeof WS_ORDERS_SEND_MESSAGE
+    payload: TMakeOrderResponse
+}
+
+export type TWSOrderActions =
+    IWSOrderConnectionStart |
+    IWSOrderConnectionSuccess |
+    IWSOrderConnectionError |
+    IWSOrderConnectionClosed |
+    IWSOrderGetMessage |
+    IWSOrderSendMessage

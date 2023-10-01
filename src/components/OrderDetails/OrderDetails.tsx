@@ -5,7 +5,7 @@ import style from "./OrderDetails.module.css";
 import {useAppSelector} from "../../utils/hooks";
 
 const OrderDetails: FC = () => {
-    const orderNumber = useAppSelector(store => store.burger.orderReducer.order.orderNumber);
+    const orderNumber = useAppSelector(store => store.order.order.orderNumber);
 
     return (
         <div className={style.OrderDetails__content}>

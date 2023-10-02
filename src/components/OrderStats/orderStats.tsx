@@ -1,32 +1,9 @@
 import styles from "./orderStats.module.css";
-import {TOrder} from "../../utils/types";
 import {FC} from "react";
 import {useAppSelector} from "../../utils/hooks";
-
-type TResult = {
-    done: Array<number>,
-    pending: Array<number>
-}
+import {filterOrders} from "../../utils/functions";
 
 const OrdersStats : FC = () => {
-    const filterOrders = (orders : Array<TOrder>) => {
-        if (!orders) {
-            return null
-        }
-        const result : TResult = {done: [], pending: []}
-        orders.filter((item : TOrder) => {
-            return item.status === "done"
-                ? result.done.push(item.number)
-                : result.pending.push(item.number)
-        })
-
-        // Комментарий кода который сокращает просто гигантский список
-        // result.done = result.done.slice(0, 5);
-        // result.pending = result.pending.slice(0, 5);
-
-        return result
-    }
-
     const { total, totalToday, orders } = useAppSelector(store => store.feed);
     const ordersStatus = orders ? filterOrders(orders) : null;
 

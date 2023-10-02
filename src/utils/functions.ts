@@ -36,3 +36,26 @@ export const getOrderStatusAsString = (order: TOrder): string => {
 
     return "Выполнен";
 }
+
+type TResult = {
+    done: Array<number>,
+    pending: Array<number>
+}
+
+export const filterOrders = (orders : Array<TOrder>) => {
+    if (!orders) {
+        return null
+    }
+    const result : TResult = {done: [], pending: []}
+    orders.filter((item : TOrder) => {
+        return item.status === "done"
+            ? result.done.push(item.number)
+            : result.pending.push(item.number)
+    })
+
+    // Комментарий кода который сокращает просто гигантский список
+    // result.done = result.done.slice(0, 5);
+    // result.pending = result.pending.slice(0, 5);
+
+    return result
+}

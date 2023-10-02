@@ -49,6 +49,10 @@ export const socketMiddleware = (wsUrl: string, wsActions: TwsActions, isAuth: b
                 }
             }
 
+            if (type === onClose) {
+                socket?.close();
+            }
+
             next(action);
         };
     };

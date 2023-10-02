@@ -4,9 +4,9 @@ import {useParams} from 'react-router-dom'
 import styles from "./order.module.css";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import {TIngredient} from "../../utils/types";
-import {countTotalPrice, formatDate, uniq} from "../../utils/functions";
+import {countTotalPrice, uniq} from "../../utils/functions";
 import OrderPosition from "../../components/OrderPosition/OrderPosition";
-import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {CurrencyIcon, FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 import {getOrderDetails} from "../../services/actions/orderDetails";
 
 const Order: FC = () => {
@@ -53,7 +53,7 @@ const Order: FC = () => {
                     </div>
                     <div className={styles.footer}>
                         <p className="text text_type_main-default text_color_inactive">
-                            {order ? formatDate(order.createdAt) : null}
+                            {order ? (<FormattedDate date={new Date(order.createdAt)} />) : null}
                         </p>
                         <div className={styles.totalPrice}>
                             <p className="text text_type_digits-default">{orderTotalPrice}</p>

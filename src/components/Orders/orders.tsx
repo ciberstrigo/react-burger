@@ -1,6 +1,5 @@
 import styles from "./orders.module.css";
 import {useLocation, useNavigate} from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 import OrderCard from "./components/OrderCard/orderCard";
 import {useAppSelector} from "../../utils/hooks";
 import React, {FC} from "react";
@@ -27,7 +26,7 @@ const Orders: FC = () => {
                     orders.map((item: TOrder, index: number) => {
                         return(
                             <div
-                                key={uuidv4()}
+                                key={item._id}
                                 className={styles.link}
                                 onClick={() => {locateToOrderItem(item)}}
                             >

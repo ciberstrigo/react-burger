@@ -3,8 +3,8 @@ import { useMemo, FC } from "react";
 import {TIngredient, TOrder} from "../../../../utils/types";
 import {useAppSelector} from "../../../../utils/hooks";
 import IngredientImage from "../IngredientImage/IngredientImage";
-import {countTotalPrice, formatDate} from "../../../../utils/functions";
-import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {countTotalPrice} from "../../../../utils/functions";
+import {CurrencyIcon, FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 
 interface IProps {
     order : TOrder,
@@ -36,7 +36,7 @@ const OrderCard : FC<IProps> = ({ order, viewStatus }) => {
                     #{order ? order.number : null}
                 </p>
                 <p className="text text_type_main-default text_color_inactive">
-                    {order ? formatDate(order.createdAt) : null}
+                    {order ? (<FormattedDate date={new Date(order.createdAt)} />) : null}
                 </p>
             </div>
             <p className={`mt-6 text text_type_main-medium ${styles.name}`}>

@@ -1,4 +1,4 @@
-import {TIngredient} from "./types";
+import {TIngredient, TOrder} from "./types";
 
 export const uniq = (arr: Array<any>) => {
     const result = [];
@@ -19,4 +19,20 @@ export const countTotalPrice = (orderIngredientsData: Array<TIngredient>) => {
             return item ? item.price : 0;
         },
     0);
+}
+
+export const getOrderStatusAsString = (order: TOrder): string => {
+    if (order.status === "done") {
+        return "Выполнен";
+    }
+
+    if (order.status === "pending") {
+        return "Готовится";
+    }
+
+    if (order.status === "created") {
+        return "Создан";
+    }
+
+    return "Выполнен";
 }

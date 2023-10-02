@@ -3,7 +3,7 @@ import { useMemo, FC } from "react";
 import {TIngredient, TOrder} from "../../../../utils/types";
 import {useAppSelector} from "../../../../utils/hooks";
 import IngredientImage from "../IngredientImage/IngredientImage";
-import {countTotalPrice} from "../../../../utils/functions";
+import {countTotalPrice, getOrderStatusAsString} from "../../../../utils/functions";
 import {CurrencyIcon, FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 
 interface IProps {
@@ -29,6 +29,10 @@ const OrderCard : FC<IProps> = ({ order, viewStatus }) => {
         return countTotalPrice(orderIngredientsData)
     }, [orderIngredientsData]);
 
+    const orderStatus = useMemo(() => {
+        return getOrderStatusAsString(order);
+    }, [order]);
+
     return (
         <li className={`${styles.wrapper}`}>
             <div className={styles.orderId}>
@@ -44,13 +48,7 @@ const OrderCard : FC<IProps> = ({ order, viewStatus }) => {
             </p>
             {viewStatus && (
                 <p className="text text_type_main-default">
-                    {order.status === "done"
-                        ? "Выполнен"
-                        : order.status === "pending"
-                            ? "Готовится"
-                            : order.status === "created"
-                                ? "Создан"
-                                : "Выполнен"}
+                    {orderStatus}
                 </p>
             )}
             <div className={styles.orderInfo}>

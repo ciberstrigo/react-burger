@@ -4,7 +4,7 @@ import {useParams} from 'react-router-dom'
 import styles from "./order.module.css";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import {TIngredient} from "../../utils/types";
-import {countTotalPrice, uniq} from "../../utils/functions";
+import {countTotalPrice, getOrderStatusAsString, uniq} from "../../utils/functions";
 import OrderPosition from "../../components/OrderPosition/OrderPosition";
 import {CurrencyIcon, FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 import {getOrderDetails} from "../../services/actions/orderDetails";
@@ -32,6 +32,10 @@ const Order: FC = () => {
         return countTotalPrice(temp)
     }, [orderIngredientsData]);
 
+    const orderStatus = useMemo(() => {
+        return getOrderStatusAsString(order);
+    }, [order]);
+
     return (
         <>
             { order &&
@@ -39,13 +43,7 @@ const Order: FC = () => {
                     <p className={`text text_type_digits-default ${styles.number}`}>#{order ? order.number : null}</p>
                     <p className="text text_type_main-medium mt-10">{order ? order.name : null}</p>
                     <p className={`text text_type_main-small mt-3 ${styles.status}`}>
-                        {order.status === "done"
-                            ? "Выполнен"
-                            : order.status === "pending"
-                                ? "Готовится"
-                                : order.status === "created"
-                                    ? "Создан"
-                                    : "Выполнен"}
+                        {orderStatus}
                     </p>
                     <p className="text text_type_main-medium mt-15">Состав:</p>
                     <div className={`${styles.ingredientsContainer} scrollable mt-6 mb-10 pr-6`}>

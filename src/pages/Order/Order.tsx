@@ -17,15 +17,15 @@ const Order: FC = () => {
         dispatch(getOrderDetails(id))
     }, [dispatch]);
 
-    const data: Array<TIngredient> = useAppSelector(store => store.burger.ingredientsReducer.ingredients);
+    const ingredients: Array<TIngredient> = useAppSelector(store => store.burger.ingredientsReducer.ingredients);
     const order = useAppSelector(store => store.orderDetail.order);
 
     const orderIngredientsData = useMemo(() => {
         return order ? order.ingredients.map((id: string) => {
-            return data.find((item: TIngredient) => {
+            return ingredients.find((item: TIngredient) => {
                 return id === item._id;
             });
-    }) : []}, [order, data]);
+    }) : []}, [order, ingredients]);
 
     const orderTotalPrice = useMemo(() => {
         const temp = uniq(orderIngredientsData)

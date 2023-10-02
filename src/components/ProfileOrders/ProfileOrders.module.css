@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-right: 8px;
+    width: 844px;
+    /*max-height: calc(100vh - 360px);*/
+    max-height: 530px;
+    /*height: inherit;*/
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
+}

@@ -45,7 +45,7 @@ export const loginning: AppThunk = (
                 if (res.success) {
                     dispatch({ type: IS_SUCCESSFUL, isAuth: true });
                     setCookie("accessToken", res.accessToken, {
-                        expires: 20 * 60,
+                        expires: 120 * 60,
                     });
                     setCookie("refreshToken", res.refreshToken);
                 } else {
@@ -121,15 +121,13 @@ export const resetPassword = (
     };
 }
 
-export const getUserInfo: AppThunk = (
-    formData?: any
-) => {
+export const getUserInfo: AppThunk = () => {
     return function (dispatch: AppDispatch) {
         dispatch({ type: IS_REQUESTING });
         api.getUserInfo(getCookie("accessToken"))
             .then((res) => {
                 if (res.success) {
-                    dispatch({ type: UPDATE_USER_DATA, payload: { ...formData, ...res.user } });
+                    dispatch({ type: UPDATE_USER_DATA, payload: { ...res.user } });
                 } else {
                     dispatch({ type: IS_FAILED });
                 }

@@ -1,28 +1,38 @@
-import React, {useEffect, useMemo} from "react";
+import React, {useMemo} from "react";
 import {FC} from "react";
-import {useParams} from 'react-router-dom'
+import {useLocation, useParams} from 'react-router-dom'
 import styles from "./order.module.css";
-import {useAppDispatch, useAppSelector} from "../../utils/hooks";
-import {TIngredient} from "../../utils/types";
+import {useAppSelector} from "../../utils/hooks";
+import {TIngredient, TOrder} from "../../utils/types";
 import {formatDate, uniq} from "../../utils/functions";
 import OrderPosition from "../../components/OrderPosition/OrderPosition";
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 const Order: FC = () => {
-    const orders = useAppSelector(store => store.feed.orders);
-    const data: any = useAppSelector(store => store.burger.ingredientsReducer.ingredients);
+    console.log('its an order');
+    const { pathname } = useLocation();
+    const orders =
+        pathname.includes('/profile/orders') ?
+            useAppSelector(store => store.userOrders.orders) :
+            useAppSelector(store => store.feed.orders);
+
+
+    console.log(pathname);
+    console.log(orders);
+
+    const data: Array<TIngredient> = useAppSelector(store => store.burger.ingredientsReducer.ingredients);
     const { id } = useParams();
 
     const order = useMemo(
-        () => orders.filter((order: any) => order._id === id)[0],[orders, id]
-    )
+        () => orders.filter((order: TOrder) => order._id === id)[0],[orders, id]
+    );
 
-    const orderIngredientsData = useMemo(() => { return order ? order.ingredients.map((id: string) => {
-        return data.find((item: TIngredient) => {
-            return id === item._id;
-        });
+    const orderIngredientsData = useMemo(() => {
+        return order ? order.ingredients.map((id: string) => {
+            return data.find((item: TIngredient) => {
+                return id === item._id;
+            });
     }) : []}, [order, data]);
-
 
     const orderTotalPrice = useMemo(() => {
         const temp = uniq(orderIngredientsData)
@@ -50,7 +60,7 @@ const Order: FC = () => {
                                     : "Выполнен"}
                     </p>
                     <p className="text text_type_main-medium mt-15">Состав:</p>
-                    <div className={`${styles.ingredientsContainer} mt-6 mb-10 pr-6`}>
+                    <div className={`${styles.ingredientsContainer} scrollable mt-6 mb-10 pr-6`}>
                         <OrderPosition ingredients={orderIngredientsData}/>
                     </div>
                     <div className={styles.footer}>

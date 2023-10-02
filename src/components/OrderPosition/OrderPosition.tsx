@@ -11,7 +11,7 @@ interface IOrderPositions {
 }
 
 const OrderPositions : FC<IOrderPositions> = ({ ingredients }) => {
-    const data = useAppSelector((store) => store.burger.ingredientsReducer.ingredients);
+    const data: Array<TIngredient> = useAppSelector((store) => store.burger.ingredientsReducer.ingredients);
     const [renderData, setRenderData] = useState<Array<TIngredient> | Array<undefined> | undefined>();
 
     const count = (elem : TIngredient | undefined) => {
@@ -24,7 +24,7 @@ const OrderPositions : FC<IOrderPositions> = ({ ingredients }) => {
         return ingredients.map((elem) => {
             return data.find((item: TIngredient) => {
                 return elem._id === item._id;
-            })!;
+            });
         });
     }, [ingredients, data]);
 
@@ -32,6 +32,8 @@ const OrderPositions : FC<IOrderPositions> = ({ ingredients }) => {
         const temp = uniq(orderIngredient)
         setRenderData(temp)
     }, [orderIngredient])
+
+    console.log(renderData);
 
     return(
         <ul className={styles.ingredientList}>
@@ -45,7 +47,7 @@ const OrderPositions : FC<IOrderPositions> = ({ ingredients }) => {
                         <div className={styles.container}>
                             <p className="text text_type_digits-default pr-2">
                                 {item?.type === "bun"
-                                    ? `${count(item) * 2} x ${item.price}`
+                                    ? `${count(item)} x ${item.price}`
                                     : `${count(item)} x ${item?.price}`}
                             </p>
                             <CurrencyIcon type="primary" />

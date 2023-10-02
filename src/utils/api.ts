@@ -2,7 +2,7 @@ import {TIngredient} from "./types";
 
 const API_URL = "https://norma.nomoreparties.space/api";
 
-const checkResponse = (res: Response) => {
+const checkResponse: (res: Response) => Promise<any> = (res) => {
     if (res.ok) {
         return res.json()
     }

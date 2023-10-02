@@ -28,9 +28,11 @@ const OrderCard : FC<IProps> = ({ order, viewStatus }) => {
     const orderTotalPrice = useMemo(() => {
         return orderIngredientsData.reduce((sum, item) => {
             if (item?.type === "bun") {
-                return (sum += item.price * 2);
+                sum += item.price * 2
+                return sum;
             }
-            return (sum += item ? item.price : 0);
+            sum += item ? item.price : 0;
+            return sum;
         }, 0);
     }, [orderIngredientsData]);
 
@@ -45,7 +47,7 @@ const OrderCard : FC<IProps> = ({ order, viewStatus }) => {
                     {order ? formatDate(order.createdAt) : null}
                 </p>
             </div>
-            <p className="mt-6 text text_type_main-medium">
+            <p className={`mt-6 text text_type_main-medium ${styles.name}`}>
                 {order ? order.name : null}
             </p>
             {viewStatus && (

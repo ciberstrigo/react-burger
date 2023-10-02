@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback} from "react";
 import AppHeader from "../AppHeaders/AppHeader";
 import style from "./App.module.css";
 import Modal from "../Modal/Modal";
@@ -21,7 +21,6 @@ import {TIngredient} from "../../utils/types";
 import {useAppDispatch} from "../../utils/hooks";
 import Feed from "../../pages/Feed/feed";
 import Order from "../../pages/Order/Order";
-import {WS_FEED_CONNECTION_CLOSED, WS_FEED_CONNECTION_START} from "../../services/actions/webSocketActionTypes";
 
 const App = () => {
     const [orderVisible, setOrderVisible] = React.useState(false);
@@ -48,18 +47,13 @@ const App = () => {
         dispatch(getIngredients());
     }, [dispatch]);
 
-    React.useEffect(() => {
-        dispatch({ type: WS_FEED_CONNECTION_START });
-
-        return () => {
-            dispatch({type: WS_FEED_CONNECTION_CLOSED})
-        }
-    }, [dispatch]);
-
+    console.log(background);
+    console.log(location);
+    // || location
     return (
         <div className={style.App__main}>
             <AppHeader />
-            <Routes location={background || location}>
+            <Routes location={background}>
                 <Route path="/"
                        element={
                             <DndProvider backend={HTML5Backend}>
@@ -73,7 +67,7 @@ const App = () => {
                 <Route path="/forgot-password" element={<ProtectedRoute anonymous={true}><ForgotPassword /></ProtectedRoute>} />
                 <Route path="/reset-password" element={<ProtectedRoute anonymous={true}><ResetPassword /></ProtectedRoute>} />
                 <Route path="/logout" element={<Logout />} />
-                <Route path="/profile" element={<ProtectedRoute anonymous={false}><Profile /></ProtectedRoute>} />
+                <Route path="/profile/*" element={<ProtectedRoute anonymous={false}><Profile /></ProtectedRoute>} />
                 <Route path={"/ingredients/:ingredientId"} element={<IngredientDetails/>}/>
                 <Route path={"/feed"} element={<Feed />}/>
                 <Route path={"/feed/:id"} element={<Order />}/>
@@ -102,6 +96,18 @@ const App = () => {
                 <Routes>
                     <Route
                         path="/feed/:id"
+                        element={
+                            <Modal onClose={modalClose}>
+                                <Order />
+                            </Modal>
+                        }
+                    />
+                </Routes>
+            )}
+            {background && (
+                <Routes>
+                    <Route
+                        path="/profile/orders/:id"
                         element={
                             <Modal onClose={modalClose}>
                                 <Order />

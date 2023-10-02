@@ -1,6 +1,6 @@
 import {ThunkAction} from "redux-thunk";
 import {
-    ADD_INGREDIENT_TO_CONSTRUCTOR,
+    ADD_INGREDIENT_TO_CONSTRUCTOR, CLEAN_CONSTRUCTOR,
     DELETE_INGREDIENT_FROM_CONSTRUCTOR,
     REPLACE_INGREDIENTS
 } from "../services/actions/constructor";
@@ -15,9 +15,10 @@ import {
     GET_ORDER_NUMBER_SUCCESS
 } from "../services/actions/applyOrder";
 import {IS_FAILED, IS_REQUESTING, IS_SUCCESSFUL, UPDATE_USER_DATA} from "../services/actions/user";
-import {RootState, store} from "./store";
-import {Action, ActionCreator, Dispatch} from "redux";
+import {RootState} from "./store";
+import {Action, ActionCreator} from "redux";
 import {
+    feedWsActions, userOrdersWsActions,
     WS_FEED_CONNECTION_CLOSED,
     WS_FEED_CONNECTION_ERROR,
     WS_FEED_CONNECTION_START,
@@ -87,10 +88,15 @@ export type TReplaceIngredients = {
     }
 }
 
+export type TCleanConstructor = {
+    type: typeof CLEAN_CONSTRUCTOR;
+}
+
 export type TConstructorActions =
     TAddIngredientToConstructor |
     TDeleteIngredientFromConstructor |
-    TReplaceIngredients;
+    TReplaceIngredients |
+    TCleanConstructor;
 
 //ingredients
 export type TGetIngredientsRequest = {
@@ -150,12 +156,13 @@ export type TUserActions =
     TIsSuccessful |
     TUpdateUserData;
 
-
 export type TActionsTypes =
     TUserActions |
     TOrderActions |
     TIngredientsActions |
-    TConstructorActions;
+    TConstructorActions |
+    TWSOrderActions |
+    TWSFeedActions;
 
 
 export type AppThunk<ReturnType = void> = ActionCreator<
@@ -217,9 +224,6 @@ export type TWSFeedActions =
     IWSFeedSendMessage
 
 
-
-
-
 export interface IWSOrderConnectionStart {
     readonly type: typeof WS_ORDERS_CONNECTION_START
 }
@@ -254,3 +258,5 @@ export type TWSOrderActions =
     IWSOrderConnectionClosed |
     IWSOrderGetMessage |
     IWSOrderSendMessage
+
+export type TwsActions = typeof feedWsActions | typeof userOrdersWsActions;

@@ -1,5 +1,4 @@
 import styles from "./orderStats.module.css";
-import scrollableStyle from "../scrollable.module.css";
 import {TOrder} from "../../utils/types";
 import {FC} from "react";
 import {useAppSelector} from "../../utils/hooks";
@@ -21,8 +20,9 @@ const OrdersStats : FC = () => {
                 : result.pending.push(item.number)
         })
 
-        result.done = result.done.slice(0, 5);
-        result.pending = result.pending.slice(0, 5);
+        // Комментарий кода который сокращает просто гигантский список
+        // result.done = result.done.slice(0, 5);
+        // result.pending = result.pending.slice(0, 5);
 
         return result
     }
@@ -35,7 +35,7 @@ const OrdersStats : FC = () => {
             <div className={`${styles.ordersCount}`}>
                 <div className={`${styles.ordersStatus}`}>
                     <h3 className="text text_type_main-medium mb-6">Готовы:</h3>
-                    <div className={`${styles.ordersNumbers} ${scrollableStyle.scrollable}`}>
+                    <div className={`${styles.ordersNumbers} scrollable`}>
                         {ordersStatus ? (ordersStatus.done.map((item, index) => (
                             <p
                                 className={`${styles.orderNumber} text text_type_digits-default`}
@@ -43,7 +43,7 @@ const OrdersStats : FC = () => {
                             >
                                 {item}
                             </p>
-                        )) ) : (null)}
+                        )) ) : null}
                     </div>
                 </div>
                 <div className={styles.ordersStatus}>
@@ -56,7 +56,7 @@ const OrdersStats : FC = () => {
                             >
                                 {item}
                             </p>
-                        ))) : (null)}
+                        ))) : null}
                     </div>
                 </div>
             </div>

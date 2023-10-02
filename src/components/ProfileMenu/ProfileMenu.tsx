@@ -20,7 +20,7 @@ export function ProfileMenu() {
                 Профиль
             </NavLink>
             <NavLink
-                to="/profile"
+                to="/profile/orders"
                 className={`${styles.link} text_type_main-medium`}
             >
                 История заказов

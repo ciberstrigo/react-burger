@@ -29,6 +29,11 @@ import {
     WS_ORDERS_CONNECTION_START, WS_ORDERS_CONNECTION_SUCCESS, WS_ORDERS_GET_MESSAGE,
     WS_ORDERS_SEND_MESSAGE
 } from "../services/actions/webSocketActionTypes";
+import {
+    GET_ORDER_DETAILS_FAILED,
+    GET_ORDER_DETAILS_REQUEST,
+    GET_ORDER_DETAILS_SUCCESS
+} from "../services/actions/orderDetails";
 
 export type TIngredient = {
     readonly _id: string,
@@ -131,6 +136,22 @@ export type TGetOrderNumberFailed = {
 
 export type TOrderActions = TGetOrderNumberRequest | TGetOrderNumberSuccess | TGetOrderNumberFailed;
 
+// order details
+export type TGetOrderDetailsRequest = {
+    readonly type: typeof GET_ORDER_DETAILS_REQUEST
+}
+
+export type TGetOrderDetailsSuccess = {
+    readonly type: typeof GET_ORDER_DETAILS_SUCCESS,
+    readonly order: any,
+}
+
+export type TGetOrderDetailsFailed = {
+    readonly type: typeof GET_ORDER_DETAILS_FAILED,
+}
+
+export type TOrderDetailsActions = TGetOrderDetailsRequest | TGetOrderDetailsSuccess | TGetOrderDetailsFailed;
+
 // user
 export type TIsRequesting = {
     readonly type: typeof IS_REQUESTING
@@ -162,7 +183,8 @@ export type TActionsTypes =
     TIngredientsActions |
     TConstructorActions |
     TWSOrderActions |
-    TWSFeedActions;
+    TWSFeedActions |
+    TOrderDetailsActions;
 
 
 export type AppThunk<ReturnType = void> = ActionCreator<

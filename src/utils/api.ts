@@ -65,6 +65,15 @@ function receiveOrderNumber(token: string, ingredients: Array<TIngredient>) {
     .then(checkResponse);
 }
 
+function receiveIngredient(number: number) {
+    return fetch(`${API_URL}/orders/${number}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then(checkResponse);
+}
+
 function register({email, password, name}: { email: string, password: string, name: string }) {
     return fetch(`${API_URL}/auth/register`, {
         method: 'POST',
@@ -160,4 +169,5 @@ export {
     resetPassword,
     getUserInfo,
     updateUserInfo,
+    receiveIngredient
 }

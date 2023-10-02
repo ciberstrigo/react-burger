@@ -12,7 +12,7 @@ const Orders: FC = () => {
     const navigate = useNavigate();
 
     const locateToOrderItem = (order: TOrder) => {
-        navigate(`/feed/${order._id}`, {
+        navigate(`/feed/${order.number}`, {
             state: { background: location },
         });
     };

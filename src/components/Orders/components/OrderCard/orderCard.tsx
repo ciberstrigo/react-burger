@@ -3,7 +3,7 @@ import { useMemo, FC } from "react";
 import {TIngredient, TOrder} from "../../../../utils/types";
 import {useAppSelector} from "../../../../utils/hooks";
 import IngredientImage from "../IngredientImage/IngredientImage";
-import {formatDate} from "../../../../utils/functions";
+import {countTotalPrice, formatDate} from "../../../../utils/functions";
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 interface IProps {
@@ -26,16 +26,8 @@ const OrderCard : FC<IProps> = ({ order, viewStatus }) => {
     }, [order.ingredients, ingredients]);
 
     const orderTotalPrice = useMemo(() => {
-        return orderIngredientsData.reduce((sum, item) => {
-            if (item?.type === "bun") {
-                sum += item.price * 2
-                return sum;
-            }
-            sum += item ? item.price : 0;
-            return sum;
-        }, 0);
+        return countTotalPrice(orderIngredientsData)
     }, [orderIngredientsData]);
-
 
     return (
         <li className={`${styles.wrapper}`}>
@@ -132,6 +124,5 @@ const OrderCard : FC<IProps> = ({ order, viewStatus }) => {
         </li>
     );
 };
-
 
 export default OrderCard;

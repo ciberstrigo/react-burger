@@ -1,31 +1,24 @@
 import React, {useMemo} from "react";
 import {FC} from "react";
-import {useLocation, useParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import styles from "./order.module.css";
-import {useAppSelector} from "../../utils/hooks";
-import {TIngredient, TOrder} from "../../utils/types";
-import {formatDate, uniq} from "../../utils/functions";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks";
+import {TIngredient} from "../../utils/types";
+import {countTotalPrice, formatDate, uniq} from "../../utils/functions";
 import OrderPosition from "../../components/OrderPosition/OrderPosition";
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {getOrderDetails} from "../../services/actions/orderDetails";
 
 const Order: FC = () => {
-    console.log('its an order');
-    const { pathname } = useLocation();
-    const orders =
-        pathname.includes('/profile/orders') ?
-            useAppSelector(store => store.userOrders.orders) :
-            useAppSelector(store => store.feed.orders);
+    const dispatch = useAppDispatch();
+    const { id } = useParams(); console.log(id);
 
-
-    console.log(pathname);
-    console.log(orders);
+    React.useEffect(() => {
+        dispatch(getOrderDetails(id))
+    }, [dispatch]);
 
     const data: Array<TIngredient> = useAppSelector(store => store.burger.ingredientsReducer.ingredients);
-    const { id } = useParams();
-
-    const order = useMemo(
-        () => orders.filter((order: TOrder) => order._id === id)[0],[orders, id]
-    );
+    const order = useAppSelector(store => store.orderDetail.order);
 
     const orderIngredientsData = useMemo(() => {
         return order ? order.ingredients.map((id: string) => {
@@ -36,12 +29,7 @@ const Order: FC = () => {
 
     const orderTotalPrice = useMemo(() => {
         const temp = uniq(orderIngredientsData)
-        return temp?.reduce((sum : number, item : TIngredient | undefined) => {
-            if (item?.type === "bun") {
-                return (sum += item.price * 2);
-            }
-            return (sum += item ? item.price : 0);
-        }, 0)
+        return countTotalPrice(temp)
     }, [orderIngredientsData]);
 
     return (

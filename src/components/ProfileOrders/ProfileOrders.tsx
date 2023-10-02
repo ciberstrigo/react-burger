@@ -38,7 +38,7 @@ const ProfileOrders: FC = () => {
                             key={index}
                             className={`${styles.link}`}
                             to={{
-                                pathname: `${location.pathname}/${order._id}`
+                                pathname: `${location.pathname}/${order.number}`
                             }}
                             state={{background : location }}
                         >

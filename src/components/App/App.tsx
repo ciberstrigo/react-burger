@@ -66,6 +66,7 @@ const App = () => {
                 <Route path="/forgot-password" element={<ProtectedRoute anonymous={true}><ForgotPassword /></ProtectedRoute>} />
                 <Route path="/reset-password" element={<ProtectedRoute anonymous={true}><ResetPassword /></ProtectedRoute>} />
                 <Route path="/logout" element={<Logout />} />
+                <Route path="/profile/orders/:id" element={<ProtectedRoute anonymous={false}><Order /></ProtectedRoute>} />
                 <Route path="/profile/*" element={<ProtectedRoute anonymous={false}><Profile /></ProtectedRoute>} />
                 <Route path={"/ingredients/:ingredientId"} element={<IngredientDetails/>}/>
                 <Route path={"/feed"} element={<Feed />}/>

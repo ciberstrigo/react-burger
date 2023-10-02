@@ -38,7 +38,9 @@ const AppHeader: FC = () => {
             </nav>
 
             <div className={style.AppHeaders__Logo}>
-                <Logo />
+                <NavLink to={"/"}>
+                    <Logo />
+                </NavLink>
             </div>
 
             <NavLink

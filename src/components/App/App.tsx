@@ -49,11 +49,10 @@ const App = () => {
 
     console.log(background);
     console.log(location);
-    // || location
     return (
         <div className={style.App__main}>
             <AppHeader />
-            <Routes location={background}>
+            <Routes location={background || location}>
                 <Route path="/"
                        element={
                             <DndProvider backend={HTML5Backend}>

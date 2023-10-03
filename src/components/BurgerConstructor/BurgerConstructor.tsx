@@ -156,6 +156,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ showOrderDetails }) => {
                         type="primary"
                         size="large"
                         onClick={makeOrder}
+                        disabled={!data.length}
                     >
                         Оформить заказ
                     </Button>

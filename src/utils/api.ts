@@ -2,7 +2,7 @@ import {TIngredient} from "./types";
 
 const API_URL = "https://norma.nomoreparties.space/api";
 
-const checkResponse = (res: Response) => {
+const checkResponse: (res: Response) => Promise<any> = (res) => {
     if (res.ok) {
         return res.json()
     }
@@ -63,6 +63,15 @@ function receiveOrderNumber(token: string, ingredients: Array<TIngredient>) {
         }),
     })
     .then(checkResponse);
+}
+
+function receiveIngredient(number: number) {
+    return fetch(`${API_URL}/orders/${number}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then(checkResponse);
 }
 
 function register({email, password, name}: { email: string, password: string, name: string }) {
@@ -160,4 +169,5 @@ export {
     resetPassword,
     getUserInfo,
     updateUserInfo,
+    receiveIngredient
 }

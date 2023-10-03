@@ -27,7 +27,7 @@ const AppHeader: FC = () => {
                     Конструктор
                 </NavLink>
                 <NavLink
-                    to={"/constructor"}
+                    to={"/feed"}
                     className={navLinkClassName}
                 >
                     <span className={style.AppHeaders__navLink__icon}>
@@ -38,7 +38,9 @@ const AppHeader: FC = () => {
             </nav>
 
             <div className={style.AppHeaders__Logo}>
-                <Logo />
+                <NavLink to={"/"}>
+                    <Logo />
+                </NavLink>
             </div>
 
             <NavLink

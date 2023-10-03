@@ -1,5 +1,5 @@
 import {
-    ADD_INGREDIENT_TO_CONSTRUCTOR,
+    ADD_INGREDIENT_TO_CONSTRUCTOR, CLEAN_CONSTRUCTOR,
     DELETE_INGREDIENT_FROM_CONSTRUCTOR,
     REPLACE_INGREDIENTS,
 } from "../actions/constructor";
@@ -50,6 +50,12 @@ export const constructorReducer = (
                 ...state,
                 ingredients: [...ingredientsBuns, ...ingredientsWithoutBuns],
             };
+        }
+        case CLEAN_CONSTRUCTOR: {
+            return {
+                ...state,
+                ingredients: []
+            }
         }
         default: {
             return state;

@@ -19,16 +19,25 @@ import {Profile} from "../../pages/Profile/profile";
 import ProtectedRoute from "../ProtectedRouteElement/ProtectedRoute";
 import {TIngredient} from "../../utils/types";
 import {useAppDispatch} from "../../utils/hooks";
+import Feed from "../../pages/Feed/feed";
+import Order from "../../pages/Order/Order";
+import {CLEAN_ORDER_NUMBER} from "../../services/actions/applyOrder";
 
 const App = () => {
     const [orderVisible, setOrderVisible] = React.useState(false);
     const dispatch = useAppDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const background = location.state && location.state.background;
+    const background = location.state?.background;
 
     const toggleOrderDetails = () => {
         setOrderVisible(!orderVisible);
+    };
+
+    const closeOrderDetails = () => {
+        setOrderVisible(false);
+        dispatch({type: CLEAN_ORDER_NUMBER});
+        console.log('order detail');
     };
 
     const showIngredientDetails = (ingredient: TIngredient) => {
@@ -62,11 +71,14 @@ const App = () => {
                 <Route path="/forgot-password" element={<ProtectedRoute anonymous={true}><ForgotPassword /></ProtectedRoute>} />
                 <Route path="/reset-password" element={<ProtectedRoute anonymous={true}><ResetPassword /></ProtectedRoute>} />
                 <Route path="/logout" element={<Logout />} />
-                <Route path="/profile" element={<ProtectedRoute anonymous={false}><Profile /></ProtectedRoute>} />
+                <Route path="/profile/orders/:id" element={<ProtectedRoute anonymous={false}><Order /></ProtectedRoute>} />
+                <Route path="/profile/*" element={<ProtectedRoute anonymous={false}><Profile /></ProtectedRoute>} />
                 <Route path={"/ingredients/:ingredientId"} element={<IngredientDetails/>}/>
+                <Route path={"/feed"} element={<Feed />}/>
+                <Route path={"/feed/:id"} element={<Order />}/>
             </Routes>
             {orderVisible && (
-                <Modal onClose={toggleOrderDetails}>
+                <Modal onClose={closeOrderDetails}>
                     <OrderDetails />
                 </Modal>
             )}
@@ -80,6 +92,30 @@ const App = () => {
                                 onClose={modalClose}
                             >
                                 <IngredientDetails/>
+                            </Modal>
+                        }
+                    />
+                </Routes>
+            )}
+            {background && (
+                <Routes>
+                    <Route
+                        path="/feed/:id"
+                        element={
+                            <Modal onClose={modalClose}>
+                                <Order />
+                            </Modal>
+                        }
+                    />
+                </Routes>
+            )}
+            {background && (
+                <Routes>
+                    <Route
+                        path="/profile/orders/:id"
+                        element={
+                            <Modal onClose={modalClose}>
+                                <Order />
                             </Modal>
                         }
                     />

@@ -4,7 +4,7 @@ import styles from './ProfileForm.module.css';
 import useFormData from "../../utils/useFormData";
 
 export default function ProfileForm() {
-    const [formData, onChangeFormData, onCancel, onSaveChanges] = useFormData()
+    const [formData, onChangeFormData, onCancel, onSaveChanges] = useFormData();
 
     return (
         <form
@@ -17,7 +17,7 @@ export default function ProfileForm() {
                 placeholder={'Имя'}
                 onChange={onChangeFormData}
                 icon={'EditIcon'}
-                value={formData.name}
+                value={formData.name || ''}
                 name={'name'}
                 error={false}
                 errorText={'Ошибка'}
@@ -28,7 +28,7 @@ export default function ProfileForm() {
                 placeholder={'E-mail'}
                 onChange={onChangeFormData}
                 icon={'EditIcon'}
-                value={formData.email}
+                value={formData.email || ''}
                 name={'email'}
                 error={false}
                 errorText={'Ошибка'}
@@ -39,7 +39,7 @@ export default function ProfileForm() {
                 placeholder={'Пароль'}
                 onChange={onChangeFormData}
                 icon={'EditIcon'}
-                value={formData.password}
+                value={formData.password || ''}
                 name={'password'}
                 error={false}
                 errorText={'Ошибка'}

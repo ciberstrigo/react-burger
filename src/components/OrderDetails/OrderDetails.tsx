@@ -27,7 +27,13 @@ const OrderDetails: FC = () => {
                 </p>
             </div>) : (
                 <div className={style.OrderDetails__content}>
-                    <p className={`text text_type_digits-large ${style.OrderDetails__number}`}>Loading...</p>
+                    {/*<p className={`text text_type_digits-large ${style.OrderDetails__number}`}>Loading...</p>*/}
+                    <div className="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
             )
     );

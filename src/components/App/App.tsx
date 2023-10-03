@@ -21,6 +21,7 @@ import {TIngredient} from "../../utils/types";
 import {useAppDispatch} from "../../utils/hooks";
 import Feed from "../../pages/Feed/feed";
 import Order from "../../pages/Order/Order";
+import {CLEAN_ORDER_NUMBER} from "../../services/actions/applyOrder";
 
 const App = () => {
     const [orderVisible, setOrderVisible] = React.useState(false);
@@ -31,6 +32,12 @@ const App = () => {
 
     const toggleOrderDetails = () => {
         setOrderVisible(!orderVisible);
+    };
+
+    const closeOrderDetails = () => {
+        setOrderVisible(false);
+        dispatch({type: CLEAN_ORDER_NUMBER});
+        console.log('order detail');
     };
 
     const showIngredientDetails = (ingredient: TIngredient) => {
@@ -47,8 +54,6 @@ const App = () => {
         dispatch(getIngredients());
     }, [dispatch]);
 
-    console.log(background);
-    console.log(location);
     return (
         <div className={style.App__main}>
             <AppHeader />
@@ -73,7 +78,7 @@ const App = () => {
                 <Route path={"/feed/:id"} element={<Order />}/>
             </Routes>
             {orderVisible && (
-                <Modal onClose={toggleOrderDetails}>
+                <Modal onClose={closeOrderDetails}>
                     <OrderDetails />
                 </Modal>
             )}

@@ -1,4 +1,5 @@
 import {
+    CLEAN_ORDER_NUMBER,
     GET_ORDER_NUMBER_FAILED,
     GET_ORDER_NUMBER_REQUEST,
     GET_ORDER_NUMBER_SUCCESS,
@@ -33,9 +34,13 @@ export const orderReducer = (
         case GET_ORDER_NUMBER_FAILED: {
             return {
                 ...state,
-                order: {
-                    orderNumber: 0,
-                },
+                initialState
+            };
+        }
+        case CLEAN_ORDER_NUMBER: {
+            return {
+                ...state,
+                order: {}
             };
         }
         default: {

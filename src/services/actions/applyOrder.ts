@@ -8,6 +8,7 @@ import {CLEAN_CONSTRUCTOR} from "./constructor";
 export const GET_ORDER_NUMBER_REQUEST = "GET_ORDER_NUMBER_REQUEST";
 export const GET_ORDER_NUMBER_SUCCESS = "GET_ORDER_NUMBER_SUCCESS";
 export const GET_ORDER_NUMBER_FAILED = "GET_ORDER_NUMBER_FAILED";
+export const CLEAN_ORDER_NUMBER = "CLEAN_ORDER_NUMBER";
 
 export const applyOrder: AppThunk = (ingredients: Array<TIngredient>) => {
     return function (dispatch: AppDispatch) {

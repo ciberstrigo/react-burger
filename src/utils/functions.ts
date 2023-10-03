@@ -21,7 +21,11 @@ export const countTotalPrice = (orderIngredientsData: Array<TIngredient>) => {
     0);
 }
 
-export const getOrderStatusAsString = (order: TOrder): string => {
+export const getOrderStatusAsString = (order: TOrder | null): string => {
+    if (null === order) {
+        return '';
+    }
+
     if (order.status === "done") {
         return "Выполнен";
     }

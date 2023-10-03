@@ -10,6 +10,7 @@ import {
     GET_INGREDIENTS_SUCCESS
 } from "../services/actions/getIngredients";
 import {
+    CLEAN_ORDER_NUMBER,
     GET_ORDER_NUMBER_FAILED,
     GET_ORDER_NUMBER_REQUEST,
     GET_ORDER_NUMBER_SUCCESS
@@ -134,7 +135,14 @@ export type TGetOrderNumberFailed = {
     readonly type: typeof GET_ORDER_NUMBER_FAILED,
 }
 
-export type TOrderActions = TGetOrderNumberRequest | TGetOrderNumberSuccess | TGetOrderNumberFailed;
+export type TCleanOrderNumber = {
+    readonly type: typeof CLEAN_ORDER_NUMBER,
+}
+
+export type TOrderActions = TGetOrderNumberRequest |
+    TGetOrderNumberSuccess |
+    TGetOrderNumberFailed |
+    TCleanOrderNumber;
 
 // order details
 export type TGetOrderDetailsRequest = {

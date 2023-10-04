@@ -11,7 +11,7 @@ import {getOrderDetails} from "../../services/actions/orderDetails";
 
 const Order: FC = () => {
     const dispatch = useAppDispatch();
-    const { id } = useParams(); console.log(id);
+    const { id } = useParams();
 
     React.useEffect(() => {
         dispatch(getOrderDetails(id))

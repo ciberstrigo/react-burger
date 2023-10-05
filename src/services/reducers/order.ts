@@ -34,7 +34,7 @@ export const orderReducer = (
         case GET_ORDER_NUMBER_FAILED: {
             return {
                 ...state,
-                initialState
+                ...initialState
             };
         }
         case CLEAN_ORDER_NUMBER: {

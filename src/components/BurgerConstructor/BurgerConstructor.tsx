@@ -103,7 +103,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ showOrderDetails }) => {
 
     return (
         <section className={style.burgerConstructor}>
-            <div className={style.burgerConstructor__list} ref={dropTarget}>
+            <div className={style.burgerConstructor__list} ref={dropTarget} id={"drop"}>
                 {!burgerBun && !ingredients.length && (
                     <div
                         className={`text text_type_main-default ${style.dropDownField}`}
@@ -117,7 +117,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ showOrderDetails }) => {
                         text={`${burgerBun.name} (верх)`}
                         price={burgerBun.price}
                         thumbnail={burgerBun.image}
-                        extraClass={"mr-4"}
+                        extraClass={`mr-4 constructor_${burgerBun._id}_top`}
                         isLocked
                     />
                 )}
@@ -140,7 +140,7 @@ const BurgerConstructor: FC<IBurgerConstructor> = ({ showOrderDetails }) => {
                         text={`${burgerBun.name} (низ)`}
                         price={burgerBun.price}
                         thumbnail={burgerBun.image}
-                        extraClass={"mr-4"}
+                        extraClass={`mr-4 constructor_${burgerBun._id}_bottom`}
                         isLocked
                     />
                 )}

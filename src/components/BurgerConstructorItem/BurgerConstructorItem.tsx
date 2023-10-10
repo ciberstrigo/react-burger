@@ -81,6 +81,7 @@ const BurgerConstructorItem: FC<IBurgerConstrictorItem> = ({ item, index }) => {
             draggable
             ref={ref}
             style={{ opacity }}
+            id={`constructor_${item._id}`}
         >
             <DragIcon type="primary" />
             <ConstructorElement

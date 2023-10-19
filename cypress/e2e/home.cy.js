@@ -6,6 +6,8 @@ const dropToConstructor = (ingredientId) => {
     cy.get('#drop').trigger('drop', {dataTransfer});
 };
 
+const someBunId = '#643d69a5c3f7b9001cfa093c';
+
 describe('testing App', () => {
     beforeEach(function () {
         cy.visit('http://localhost:3000');
@@ -21,17 +23,17 @@ describe('testing App', () => {
     })
 
     it('ingredient details modal', () => {
-        cy.get('#643d69a5c3f7b9001cfa093c').click();
+        cy.get(someBunId).click();
         cy.get('#modals').should('exist');
         cy.get('#modal_close_cross').click();
     });
 
     it('moves random ingredients to constructor, making order and close modal', () => {
-        dropToConstructor('#643d69a5c3f7b9001cfa093c');
+        dropToConstructor(someBunId);
         dropToConstructor('#643d69a5c3f7b9001cfa0942');
         dropToConstructor('#643d69a5c3f7b9001cfa0941');
         dropToConstructor('#643d69a5c3f7b9001cfa0946');
-        dropToConstructor('#643d69a5c3f7b9001cfa093c');
+        dropToConstructor(someBunId);
         dropToConstructor('#643d69a5c3f7b9001cfa0949');
 
         cy.get('button').contains('Оформить заказ').click()

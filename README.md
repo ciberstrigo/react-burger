@@ -2,6 +2,8 @@
 
 Проект создан с помощью [Create React App](https://github.com/facebook/create-react-app) в рамках обучения в Яндекс.Практикуме по факультету "react разработчик".
 
+## Production
+https://paypalme30000usd.nomoredomainsrocks.ru/
 
 ## Доступные скрипты
 

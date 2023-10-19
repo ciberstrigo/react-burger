@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZWYzNDI5ODJlMjc3MDAxYmZhYzI1YSIsImlhdCI6MTY5NzcxMTUyNywiZXhwIjoxNjk3NzEyNzI3fQ.-m6M_3k_kSx4HnomSkRyFsO92CaZFmAefoW5i8TuGWs",
+  "refreshToken": "177e5e9ba7fddcc77cd88b3f67bff6ec916b6c4e97fdaef26a87b0d4ef64821dd7bbb46d4b3d3755",
+  "user": {
+    "email": "test@data.com",
+    "name": "Test User"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "name": "Space метеоритный краторный экзо-плантаго бургер",
+  "order": {
+    "ingredients": [
+    ],
+    "_id": "653102c652b4cf001d86b7df",
+    "owner": {
+      "name": "Leonid Averianko",
+      "email": "ciberstrigo@gmail.com",
+      "createdAt": "2023-08-30T12:20:57.274Z",
+      "updatedAt": "2023-10-02T11:39:08.061Z"
+    },
+    "status": "done",
+    "name": "Space метеоритный краторный экзо-плантаго бургер",
+    "createdAt": "2023-10-19T10:19:50.700Z",
+    "updatedAt": "2023-10-19T10:19:50.965Z",
+    "number": 99999,
+    "price": 9990
+  }
+}

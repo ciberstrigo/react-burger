@@ -151,7 +151,7 @@ export type TGetOrderDetailsRequest = {
 
 export type TGetOrderDetailsSuccess = {
     readonly type: typeof GET_ORDER_DETAILS_SUCCESS,
-    readonly order: any,
+    readonly order: any, // TODO Почему тут any?
 }
 
 export type TGetOrderDetailsFailed = {

@@ -23,6 +23,7 @@ const Modal: FC<IModal> = ({ header, children, onClose }) => {
                     <button
                         className={styles.Modal__closeButton}
                         onClick={onClose}
+                        id={'modal_close_cross'}
                     >
                         <CloseIcon type="primary" />
                     </button>

@@ -3,14 +3,14 @@ import {
     DELETE_INGREDIENT_FROM_CONSTRUCTOR,
     REPLACE_INGREDIENTS,
 } from "../actions/constructor";
-import {TConstructorActions} from "../../utils/types";
+import {TConstructorActions, TIngredient} from "../../utils/types";
 
 const initialState = {
     ingredients: [],
 };
 
 export const constructorReducer = (
-    state = initialState,
+    state: {ingredients: TIngredient[]} = initialState,
     action: TConstructorActions
 ) => {
     switch (action.type) {

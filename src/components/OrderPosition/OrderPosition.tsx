@@ -33,8 +33,6 @@ const OrderPositions : FC<IOrderPositions> = ({ ingredients }) => {
         setRenderData(temp)
     }, [orderIngredient])
 
-    console.log(renderData);
-
     return(
         <ul className={styles.ingredientList}>
             {renderData && renderData.map((item,index) => {

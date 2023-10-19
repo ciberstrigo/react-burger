@@ -37,7 +37,6 @@ const App = () => {
     const closeOrderDetails = () => {
         setOrderVisible(false);
         dispatch({type: CLEAN_ORDER_NUMBER});
-        console.log('order detail');
     };
 
     const showIngredientDetails = (ingredient: TIngredient) => {

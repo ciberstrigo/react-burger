@@ -27,6 +27,7 @@ const BurgerIngredientsItems: FC<IBurgerIngredientItems> = ({ ingredient, onClic
 
     return (
         <li
+            id={ingredient._id}
             key={ingredient._id}
             className={style.item}
             onClick={() => {

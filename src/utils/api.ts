@@ -52,7 +52,7 @@ const receiveIngredients = () => {
 };
 
 function receiveOrderNumber(token: string, ingredients: Array<TIngredient>) {
-    return fetch(`${API_URL}/orders`, {
+    return fetchWithRefresh(`${API_URL}/orders`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -62,16 +62,15 @@ function receiveOrderNumber(token: string, ingredients: Array<TIngredient>) {
             ingredients,
         }),
     })
-    .then(checkResponse);
 }
 
 function receiveIngredient(number: number) {
-    return fetch(`${API_URL}/orders/${number}`, {
+    return fetchWithRefresh(`${API_URL}/orders/${number}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
         }
-    }).then(checkResponse);
+    });
 }
 
 function register({email, password, name}: { email: string, password: string, name: string }) {
